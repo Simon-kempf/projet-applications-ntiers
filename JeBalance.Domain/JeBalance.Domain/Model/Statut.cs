@@ -11,6 +11,8 @@ namespace JeBalance.Domain.Model
         NONE = 0,
         INFORMATEUR = 1,
         SUSPECT = 2,
-        CALOMNIATEUR = 3
+        CALOMNIATEUR = 3,
+        VIP = 4,
+        ADMINISTRATEUR = 5
     }
 }
