@@ -14,6 +14,7 @@ namespace JeBalance.Domain.Model
         private Personne Suspect { get; }
         private Delit Delit { get; }
         private PaysEvasion? PaysEvasion { get; }
+        private Reponse? Reponse { get; }
         public Denonciation(Personne informateur, Personne suspect, Delit delit, string? pays) : base(0)
         {
             Informateur = informateur;
