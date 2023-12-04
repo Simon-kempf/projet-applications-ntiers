@@ -10,11 +10,12 @@ namespace JeBalance.Domain.Model
 {
     internal class Denonciation : Entity
     {
-        private Personne Informateur { get; }
-        private Personne Suspect { get; }
+        private IPersonne Informateur { get; }
+        private IPersonne Suspect { get; }
         private Delit Delit { get; }
         private PaysEvasion? PaysEvasion { get; }
-        public Denonciation(Personne informateur, Personne suspect, Delit delit, string? pays) : base(0)
+        private Reponse? Reponse { get; }
+        public Denonciation(IPersonne informateur, IPersonne suspect, Delit delit, string? pays) : base(0)
         {
             Informateur = informateur;
             informateur.Statut = Statut.INFORMATEUR;
@@ -25,7 +26,7 @@ namespace JeBalance.Domain.Model
             if(pays != null) { PaysEvasion = new PaysEvasion(pays); }
         }
 
-        public Denonciation(int id, Personne informateur, Personne suspect, Delit delit, string? pays) : base(id)
+        public Denonciation(int id, IPersonne informateur, IPersonne suspect, Delit delit, string? pays) : base(id)
         {
             Informateur = informateur;
             informateur.Statut = Statut.INFORMATEUR;
