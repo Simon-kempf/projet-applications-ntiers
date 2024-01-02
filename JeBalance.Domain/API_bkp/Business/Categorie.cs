@@ -8,26 +8,26 @@ using System.Xml.Linq;
 
 namespace JeBalance.Domain.Business
 {
-    public class Entrepot
+    public class Categorie
     {
-        private readonly List<Personne> _personnes;
+        private readonly List<IPersonne> _personnes;
 
-        public int Id { get; }
+        public string Nom { get; }
 
-        public IReadOnlyCollection<Personne> Personnes => _personnes;
+        public IReadOnlyCollection<IPersonne> Personnes => _personnes;
 
-        public Entrepot(int id)
+        public Categorie(string nom)
         {
-            Id = id;
-            _personnes = new List<Personne>();
+            Nom = nom;
+            _personnes = new List<IPersonne>();
         }
 
-        public void AjouterPersonne(Personne personne)
+        public void AjouterPersonne(IPersonne personne)
         {
             _personnes.Add(personne);
         }
 
-        public Personne? RechercherPersonne(int id)
+        public IPersonne? RechercherPersonne(int id)
         {
             return _personnes.FirstOrDefault(p => p.Id == id);
         }
