@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Domain.Model
 {
-    internal class Denonciation : Entity
+    public class Denonciation : Entity
     {
-        private IPersonne Informateur { get; }
-        private IPersonne Suspect { get; }
-        private Delit Delit { get; }
-        private PaysEvasion? PaysEvasion { get; }
+        public IPersonne Informateur { get; }
+        public IPersonne Suspect { get; }
+        public Delit Delit { get; }
+        public PaysEvasion? PaysEvasion { get; }
         private Reponse? Reponse { get; }
         public Denonciation(IPersonne informateur, IPersonne suspect, Delit delit, string? pays) : base(0)
         {
