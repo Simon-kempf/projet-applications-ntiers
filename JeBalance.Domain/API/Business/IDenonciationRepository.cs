@@ -7,5 +7,7 @@ namespace API.Business
         Denonciation? Rechercher(int id);
 
         IReadOnlyCollection<Denonciation> Lister();
+
+        void Ajouter(Denonciation denonciation);
     }
 }

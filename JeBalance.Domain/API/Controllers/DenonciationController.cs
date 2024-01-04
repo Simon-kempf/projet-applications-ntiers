@@ -29,16 +29,22 @@ namespace API.Controllers
         [Route("denonciations/create")]
         public IActionResult AjouterDenonciation([FromBody] DenonciationDto denonciation)
         {
-            var _denonciation = new Denonciation(denonciation.Informateur!, denonciation.Suspect!, denonciation.Delit!.Value, denonciation.PaysEvasion!.Value);
-
-            _repository.Lister().Append(_denonciation);
-
             if (denonciation == null)
             {
                 return BadRequest();
             }
 
-            return Ok(denonciation);
+            var informateurDto = denonciation.Informateur;
+            var informateur = new Personne(informateurDto!.Id, informateurDto.Nom!.Value, informateurDto.Prenom!.Value);
+
+            var suspectDto = denonciation.Suspect;
+            var suspect = new Personne(suspectDto!.Id, suspectDto.Nom!.Value, suspectDto.Prenom!.Value);
+
+            var _denonciation = new Denonciation(_repository.Lister().Count(), informateur, suspect, denonciation.Delit!.Value, denonciation.PaysEvasion!.Value);
+
+            _repository.Ajouter(_denonciation);
+
+            return Ok(Convertir(_denonciation));
         }
 
         [HttpGet]
@@ -64,8 +70,25 @@ namespace API.Controllers
 
             return new DenonciationDto
             {
-                Informateur = denonciation.Informateur,
-                Suspect = denonciation.Suspect
+                Id = denonciation.Id,
+                Informateur = Convertir(denonciation.Informateur),
+                Suspect = Convertir(denonciation.Suspect),
+                Delit = denonciation.Delit,
+                PaysEvasion = denonciation.PaysEvasion
+            };
+        }
+        private static PersonneDto? Convertir(IPersonne? personne)
+        {
+            if (personne == null)
+            {
+                return null;
+            }
+
+            return new PersonneDto
+            {
+                Id = personne.Id,
+                Nom = personne.Nom,
+                Prenom = personne.Prenom
             };
         }
     }

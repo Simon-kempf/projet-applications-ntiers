@@ -16,8 +16,5 @@ namespace API.Controllers.Dto
 
         [JsonPropertyName("prenom")]
         public Prenom? Prenom { get; set; }
-
-        [JsonPropertyName("adresse")]
-        public string? Adresse { get; set; }
     }
 }

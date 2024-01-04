@@ -23,5 +23,10 @@ namespace API.DataAccess
         {
             return _donnees;
         }
+
+        public void Ajouter(Denonciation denonciation)
+        {
+            _donnees.Add(denonciation);
+        }
     }
 }

@@ -13,10 +13,10 @@ namespace API.Controllers.Dto
         public int Id { get; set; }
 
         [JsonPropertyName("informateur")]
-        public IPersonne? Informateur { get ; set; }
+        public PersonneDto? Informateur { get ; set; }
 
         [JsonPropertyName("suspect")]
-        public IPersonne? Suspect { get; set; }
+        public PersonneDto? Suspect { get; set; }
 
         [JsonPropertyName("delit")]
         public Delit? Delit { get; set; }
