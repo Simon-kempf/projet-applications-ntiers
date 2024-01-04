@@ -10,7 +10,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IDenonciationRepository, DenonciationRepository>();
-builder.Services.AddScoped<IPersonne, Personne>();
 
 var app = builder.Build();
 

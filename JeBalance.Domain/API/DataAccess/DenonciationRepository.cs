@@ -10,7 +10,8 @@ namespace API.DataAccess
 
         public DenonciationRepository()
         {
-            
+            var denonciation = new Denonciation(new Personne("Machin", "Bidule"), new Personne("Truc", "Chose"), Delit.EvasionFiscale, "France");
+            _donnees.Add(denonciation);
         }
 
         public Denonciation? Rechercher(int id)
