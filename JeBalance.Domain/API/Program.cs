@@ -1,5 +1,6 @@
 using API.Business;
 using API.DataAccess;
+using JeBalance.Domain.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddSingleton<ICategorieRepository, CategorieRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IDenonciationRepository, DenonciationRepository>();
+builder.Services.AddScoped<IPersonne, Personne>();
 
 var app = builder.Build();
 

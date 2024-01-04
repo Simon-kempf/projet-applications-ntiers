@@ -14,6 +14,7 @@ namespace API.Controllers
 
         public DenonciationController(IDenonciationRepository repository)
         {
+            var denonciation = new Denonciation(new Personne("Machin", "Bidule"), new Personne("Truc", "Chose"), Delit.EvasionFiscale, "France");
             _repository = repository;
         }
 
