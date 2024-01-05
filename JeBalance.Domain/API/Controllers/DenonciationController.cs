@@ -61,14 +61,14 @@ namespace API.Controllers
             return Ok(Convertir(denonciation));
         }
 
-        private static DenonciationDto? Convertir(Denonciation? denonciation)
+        private static DenonciationConsultationDto? Convertir(Denonciation? denonciation)
         {
             if (denonciation == null)
             {
                 return null;
             }
 
-            return new DenonciationDto
+            return new DenonciationConsultationDto
             {
                 Id = denonciation.Id,
                 Informateur = Convertir(denonciation.Informateur),

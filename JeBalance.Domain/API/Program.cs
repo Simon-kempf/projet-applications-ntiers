@@ -9,7 +9,7 @@ builder.Services.AddSingleton<ICategorieRepository, CategorieRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IDenonciationRepository, DenonciationRepository>();
+builder.Services.AddSingleton<IDenonciationRepository, DenonciationRepository>();
 
 var app = builder.Build();
 

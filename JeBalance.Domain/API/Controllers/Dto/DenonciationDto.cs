@@ -9,9 +9,6 @@ namespace API.Controllers.Dto
 {
     public class DenonciationDto
     {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-
         [JsonPropertyName("informateur")]
         public PersonneDto? Informateur { get ; set; }
 
