@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JeBalance.Domain", "JeBalance.Domain\JeBalance.Domain.csproj", "{392EEE4B-4D47-48B7-A4C0-89DBDDAB8524}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{A7010C15-4DC5-42C7-A325-1F9FF30B0FAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{A7010C15-4DC5-42C7-A325-1F9FF30B0FAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Secrete", "API_Secrete\API_Secrete.csproj", "{66140DBD-CE8F-4E67-8E54-AE63DFBB266E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A7010C15-4DC5-42C7-A325-1F9FF30B0FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7010C15-4DC5-42C7-A325-1F9FF30B0FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7010C15-4DC5-42C7-A325-1F9FF30B0FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66140DBD-CE8F-4E67-8E54-AE63DFBB266E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66140DBD-CE8F-4E67-8E54-AE63DFBB266E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66140DBD-CE8F-4E67-8E54-AE63DFBB266E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66140DBD-CE8F-4E67-8E54-AE63DFBB266E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
