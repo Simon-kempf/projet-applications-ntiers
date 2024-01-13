@@ -9,12 +9,8 @@ using System.Xml.Linq;
 
 namespace JeBalance.Domain.Model
 {
-    public class Personne : Entity
+    public class Personne : IPersonne
     {
-        private Nom Nom { get; }
-
-        private Prenom Prenom { get; }
-        public Statut Statut { get; set; }
         public Personne(string nom, string prenom) : base(0)
         {
             Nom = new Nom(nom);
