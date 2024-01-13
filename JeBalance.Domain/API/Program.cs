@@ -4,7 +4,6 @@ using JeBalance.Domain.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<ICategorieRepository, CategorieRepository>();
 builder.Services.AddSingleton<IDenonciationRepository, DenonciationRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
