@@ -33,10 +33,5 @@ namespace JeBalance.Domain.Model
 
             if (pays != null) { PaysEvasion = new PaysEvasion(pays); }
         }
-
-        public void repondre(Reponse reponse)
-        {
-            Reponse = reponse;
-        }
     }
 }
