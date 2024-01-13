@@ -8,6 +8,8 @@ namespace API.Business
 
         IReadOnlyCollection<Denonciation> Lister();
 
+        IEnumerable<Denonciation> ListerNonTraitees();
+
         void Ajouter(Denonciation denonciation);
     }
 }

@@ -7,15 +7,9 @@ using System.Text.Json.Serialization;
 
 namespace API.Controllers.Dto
 {
-    public class DenonciationConsultationDto : DenonciationDto
+    public class ReponseConsultationDto : ReponseDto
     {
         [JsonPropertyName("horodatage")]
         public DateTime? Horodatage { get; set; }
-
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-
-        [JsonPropertyName("reponse")]
-        public ReponseDto? Reponse { get; set; }
     }
 }

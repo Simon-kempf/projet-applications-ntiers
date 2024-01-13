@@ -13,10 +13,11 @@ namespace JeBalance.Domain.Model
         public IDenonciation(int id) : base(id)
         {
         }
+        public DateTime? Horodatage { get; set; }
         public IPersonne? Informateur { get; set; }
         public IPersonne? Suspect { get; set; }
         public Delit? Delit { get; set; }
         public PaysEvasion? PaysEvasion { get; set; }
-        private Reponse? Reponse { get; set; }
+        public Reponse? Reponse { get; set; }
     }
 }

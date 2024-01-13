@@ -10,7 +10,7 @@ namespace API.DataAccess
 
         public DenonciationRepository()
         {
-            var denonciation = new Denonciation(new Personne("Machin", "Bidule"), new Personne("Truc", "Chose"), Delit.EvasionFiscale, "France");
+            var denonciation = new Denonciation(new DateTime(), new Personne("Machin", "Bidule"), new Personne("Truc", "Chose"), Delit.EvasionFiscale, "France");
             _donnees.Add(denonciation);
         }
 
@@ -22,6 +22,10 @@ namespace API.DataAccess
         public IReadOnlyCollection<Denonciation> Lister()
         {
             return _donnees;
+        }
+        public IEnumerable<Denonciation> ListerNonTraitees()
+        {
+            return _donnees.Where(r => r.Reponse == null);
         }
 
         public void Ajouter(Denonciation denonciation)

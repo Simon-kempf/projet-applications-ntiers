@@ -10,8 +10,9 @@ namespace JeBalance.Domain.Model
 {
     public class Denonciation : IDenonciation
     {
-        public Denonciation(IPersonne informateur, IPersonne suspect, Delit delit, string? pays) : base(0)
+        public Denonciation(DateTime horodatage, IPersonne informateur, IPersonne suspect, Delit delit, string? pays) : base(0)
         {
+            Horodatage = horodatage;
             Informateur = informateur;
             informateur.Statut = Statut.INFORMATEUR;
             Suspect = suspect;
@@ -21,8 +22,9 @@ namespace JeBalance.Domain.Model
             if(pays != null) { PaysEvasion = new PaysEvasion(pays); }
         }
 
-        public Denonciation(int id, IPersonne informateur, IPersonne suspect, Delit delit, string? pays) : base(id)
+        public Denonciation(DateTime horodatage, int id, IPersonne informateur, IPersonne suspect, Delit delit, string? pays) : base(id)
         {
+            Horodatage = horodatage;
             Informateur = informateur;
             informateur.Statut = Statut.INFORMATEUR;
             Suspect = suspect;
@@ -30,6 +32,11 @@ namespace JeBalance.Domain.Model
             Delit = delit;
 
             if (pays != null) { PaysEvasion = new PaysEvasion(pays); }
+        }
+
+        public void repondre(Reponse reponse)
+        {
+            Reponse = reponse;
         }
     }
 }

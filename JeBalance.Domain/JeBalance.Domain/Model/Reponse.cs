@@ -8,18 +8,21 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Domain.Model
 {
-    internal class Reponse : Entity
+    public class Reponse : Entity
     {
-        private Type Type { get; }
-        private int? Retribution { get; }
-        public Reponse(Type type, int? retribution) : base(0)
+        public DateTime Horodatage { get; }
+        public Type Type { get; }
+        public int? Retribution { get; }
+        public Reponse(DateTime horodatage, Type type, int? retribution) : base(0)
         {
+            Horodatage = horodatage;
             Type = type;
             if (retribution != null) { Retribution = retribution; }
         }
 
-        public Reponse(int id, Type type, int? retribution) : base(id)
+        public Reponse(DateTime horodatage, int id, Type type, int? retribution) : base(id)
         {
+            Horodatage = horodatage;
             Type = type;
             if (retribution != null) { Retribution = retribution; }
         }
