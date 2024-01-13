@@ -84,7 +84,7 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            denonciation.repondre(new Reponse(DateTime.Now, (JeBalance.Domain.Model.Type) reponse.Type, reponse.Retribution));
+            denonciation.Reponse = new Reponse(DateTime.Now, (JeBalance.Domain.Model.Type) reponse.Type, reponse.Retribution);
 
             return Ok(denonciation.Id);
         }
