@@ -7,7 +7,11 @@ public class Nom : SimpleValueObject<string>
     public const int MIN_LENGTH = 2;
     public const int MAX_LENGTH = 50;
 
-    public Nom(string value) : base(value)
+	public Nom() : base("")
+	{
+	}
+
+	public Nom(string value) : base(value)
     {
     }
 
