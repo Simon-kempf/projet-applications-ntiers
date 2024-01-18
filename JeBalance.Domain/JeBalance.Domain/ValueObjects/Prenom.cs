@@ -4,8 +4,8 @@ namespace JeBalance.Domain.ValueObjects;
 
 public class Prenom : SimpleValueObject<string>
 {
-    private const int MIN_LENGTH = 2;
-    private const int MAX_LENGTH = 50;
+    public const int MIN_LENGTH = 2;
+    public const int MAX_LENGTH = 50;
 
     public Prenom(string value) : base(value)
     {
