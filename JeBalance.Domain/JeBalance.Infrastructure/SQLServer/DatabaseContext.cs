@@ -35,10 +35,7 @@ namespace JeBalance.Infrastructure.SQLServer
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer("Data Source=" +
-					"(localdb)\\MSSQLLocalDB; Initial Catalog = JeBalance; " +
-					"IntegratedSecurity = True; ApplicationIntent = ReadWrite; " +
-					"MultiSubnetFailover = False");
+				optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=JeBalance;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 		    }
 		}
 

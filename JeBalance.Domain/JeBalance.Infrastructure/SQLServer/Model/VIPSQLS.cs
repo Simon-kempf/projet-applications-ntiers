@@ -17,12 +17,12 @@ namespace JeBalance.Infrastructure.SQLServer.Model
         public int Id { get; set; }
 
         [Column("nom")]
-        public Nom Nom { get; set; } = new Nom(string.Empty);
+        public String Nom { get; set; } = new Nom(string.Empty).ToString()!;
 
         [Column("prenom")]
-        public Prenom Prenom { get; set; } = new Prenom(string.Empty);
+        public String Prenom { get; set; } = new Prenom(string.Empty).ToString()!;
 
         [Column("statut")]
-        public Statut Statut { get; set; } = Statut.VIP;
+        public int Statut { get; set; } = 4;
     }
 }

@@ -17,11 +17,11 @@ namespace JeBalance.Infrastructure.SQLServer.Model
         [Column("idSuspect")]
         public int IdSuspect { get; set; }
         [Column("delit")]
-        public Delit Delit { get; set; }
+        public int Delit { get; set; } 
         [Column("statutInfo")]
-        public Statut StatutInfo { get; set; }
+        public int StatutInfo { get; set; }
         [Column("statutSuspect")]
-        public Statut StatutSuspect { get; set; }
+        public int StatutSuspect { get; set; }
         [Column("horodatage")]
         public DateTime Horodatage { get; set; }
     }
