@@ -13,7 +13,11 @@ namespace JeBalance.Infrastructure.SQLServer
     public class DatabaseContext : DbContext
     {
 		public const string DEFAULT_SCHEMA = "app";
-		public DbSet<PersonneSQLS> Places { get; set; }
+		public DbSet<PersonneSQLS> Personnes { get; set; }
+		public DbSet<DenonciationSQLS> Denonciations { get; set; }
+		public DbSet<ReponseSQLS> Reponses { get; set; }
+		public DbSet<VIPSQLS> VIPs { get; set; }
+
 		public DatabaseContext()
 		{
 		}
@@ -32,7 +36,7 @@ namespace JeBalance.Infrastructure.SQLServer
 			if (!optionsBuilder.IsConfigured)
 			{
 				optionsBuilder.UseSqlServer("Data Source=" +
-					"(localdb)\\MSSQLLocalDB; Initial Catalog = ParkNGo; " +
+					"(localdb)\\MSSQLLocalDB; Initial Catalog = JeBalance; " +
 					"IntegratedSecurity = True; ApplicationIntent = ReadWrite; " +
 					"MultiSubnetFailover = False");
 		    }
