@@ -13,6 +13,9 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 {
     public class VIPSQLS
     {
+        [Column("id")]
+        public int Id { get; set; }
+
         [Column("nom")]
         public Nom Nom { get; set; } = new Nom(string.Empty);
 
