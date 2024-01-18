@@ -17,9 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SQLServer\Model\" />
     <Folder Include="SQLServer\Configurations\" />
     <Folder Include="SQLServer\Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JeBalance.Domain\JeBalance.Domain.csproj" />
   </ItemGroup>
 
 </Project>
