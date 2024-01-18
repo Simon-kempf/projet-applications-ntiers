@@ -13,10 +13,10 @@ namespace JeBalance.Infrastructure.SQLServer.Model
         [Column("id")]
         public int Id { get; set; }
         [Column("horodatage")]
-        public DateTime horodatage { get; set; }
+        public DateTime Horodatage { get; set; }
         [Column("type")]
-        public Domain.Model.Type type { get; set; }
+        public Domain.Model.Type Type { get; set; }
         [Column("retribution")]
-        public int retribution { get; set; }
+        public int Retribution { get; set; }
     }
 }
