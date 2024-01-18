@@ -21,7 +21,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 		public Prenom Prenom { get; set; } = new Prenom(string.Empty);
 
 		[Column("statut")]
-		public Statut Statut { get; set; }
+		public Statut Statut { get; set; } = JeBalance.Domain.Model.Statut.NONE;
 
 	}
 }
