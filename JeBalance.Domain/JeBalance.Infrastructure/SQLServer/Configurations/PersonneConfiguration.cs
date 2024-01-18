@@ -16,7 +16,7 @@ namespace JeBalance.Infrastructure.SQLServer.Configurations
 		public void Configure(EntityTypeBuilder<PersonneSQLS> builder)
 		{
 			builder
- .ToTable("PLACES", DatabaseContext.DEFAULT_SCHEMA)
+ .ToTable("PERSONNES", DatabaseContext.DEFAULT_SCHEMA)
  .HasKey(personne => personne.Id);
 			builder.Property(personne => personne.Nom)
 			.IsRequired().HasMaxLength(Nom.MAX_LENGTH);
