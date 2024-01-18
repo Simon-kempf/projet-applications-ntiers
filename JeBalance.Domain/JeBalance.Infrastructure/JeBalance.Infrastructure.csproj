@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SQLServer\Configurations\" />
     <Folder Include="SQLServer\Repositories\" />
   </ItemGroup>
 
