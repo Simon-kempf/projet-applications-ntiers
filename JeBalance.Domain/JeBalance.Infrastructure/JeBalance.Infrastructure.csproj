@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SQLServer\Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\JeBalance.Domain\JeBalance.Domain.csproj" />
   </ItemGroup>
 
