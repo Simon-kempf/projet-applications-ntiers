@@ -10,6 +10,11 @@ namespace JeBalance.Domain.Model
 {
     public class Denonciation : IDenonciation
     {
+        public Denonciation() : base(0)
+        {
+
+        }
+
         public Denonciation(DateTime horodatage, IPersonne informateur, IPersonne suspect, Delit delit, string? pays) : base(0)
         {
             Horodatage = horodatage;
