@@ -17,5 +17,7 @@ namespace JeBalance.Domain.Model.Utilisateurs
             Prenom = new Prenom(prenom);
             Statut = Statut.VIP;
         }
-    }
+
+		public VIP() : base(0) {}
+	}
 }
