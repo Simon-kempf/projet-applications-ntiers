@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Infrastructure.SQLServer.Model
 {
-	public class PersonneSQLS
+	public class PersonneSQLS : Personne
 	{
 		[Column("id")]
-		public int Id { get; set; }
+		public new int Id { get; set; }
 
 		[Column("nom")]
-		public Nom Nom { get; set; } = new Nom(string.Empty);
+		public new String Nom { get; set; } = new Nom(string.Empty).ToString()!;
 
 		[Column("prenom")]
-		public Prenom Prenom { get; set; } = new Prenom(string.Empty);
+		public new String Prenom { get; set; } = new Prenom(string.Empty).ToString()!;
 
 		[Column("statut")]
-		public Statut Statut { get; set; } = JeBalance.Domain.Model.Statut.NONE;
+		public new int Statut { get; set; } = 0;
 
 	}
 }

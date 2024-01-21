@@ -15,7 +15,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
         [Column("horodatage")]
         public DateTime Horodatage { get; set; }
         [Column("type")]
-        public Domain.Model.Type Type { get; set; }
+        public int Type { get; set; }
         [Column("retribution")]
         public int Retribution { get; set; }
     }

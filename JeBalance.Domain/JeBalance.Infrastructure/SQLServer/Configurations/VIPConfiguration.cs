@@ -23,7 +23,7 @@ namespace JeBalance.Infrastructure.SQLServer.Configurations
             builder.Property(VIP => VIP.Prenom)
             .IsRequired().HasMaxLength(Prenom.MAX_LENGTH);
             builder.Property(VIP => VIP.Statut)
-            .IsRequired().HasColumnType("string");
+            .IsRequired().HasColumnType("int");
         }
     }
 }

@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Infrastructure.SQLServer.Model
 {
-    public class DenonciationSQLS
+    public class DenonciationSQLS : Denonciation
     {
         [Column("id")]
-        public int Id { get; set; }
+        public new int Id { get; set; }
         [Column("idInformateur")]
         public int IdInformateur { get; set; }
         [Column("idSuspect")]
         public int IdSuspect { get; set; }
         [Column("delit")]
-        public Delit Delit { get; set; }
+        public new int Delit { get; set; } 
         [Column("statutInfo")]
-        public Statut StatutInfo { get; set; }
+        public int StatutInfo { get; set; }
         [Column("statutSuspect")]
-        public Statut StatutSuspect { get; set; }
+        public int StatutSuspect { get; set; }
         [Column("horodatage")]
-        public DateTime Horodatage { get; set; }
+        public new DateTime Horodatage { get; set; }
     }
 }

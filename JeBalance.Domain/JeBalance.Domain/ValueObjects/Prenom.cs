@@ -7,7 +7,10 @@ public class Prenom : SimpleValueObject<string>
     public const int MIN_LENGTH = 2;
     public const int MAX_LENGTH = 50;
 
-    public Prenom(string value) : base(value)
+	public Prenom() : base("")
+	{
+	}
+	public Prenom(string value) : base(value)
     {
     }
 
