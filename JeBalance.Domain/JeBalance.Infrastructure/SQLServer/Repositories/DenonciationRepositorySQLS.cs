@@ -44,11 +44,12 @@ public class DenonciationRepositorySQLS
     }
     public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset, Specification<Denonciation> specification)
     {
-        var results = _context.Denonciations
+        var dbSet = _context.Denonciations
         .Where(specification.IsSatisfiedBy)
         .Skip(offset)
         .Take(limit)
         .Select(denonciation => denonciation);
-        return Task.FromResult((results, _context.Denonciations.Count()));
+        IEnumerable<Denonciation> results = dbSet.ToList();
+        return Task.FromResult((results, results.Count()));
     }
 }

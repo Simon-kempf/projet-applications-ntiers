@@ -33,7 +33,7 @@ namespace API_Secrete.Controllers
 
             if (vip == null)
             {
-                return BadRequest();
+                return BadRequest("Aucun VIP ne correspond à cet identifiant");
             }
 
             return Ok(Convertir(vip));
@@ -45,10 +45,10 @@ namespace API_Secrete.Controllers
         {
             if (_repository.Rechercher(id) == null)
             {
-                return BadRequest();
+                return BadRequest("Aucun VIP ne correspond à cet identifiant");
             }
             _repository.Supprimer(id);
-            return Ok();
+            return Ok(id);
         }
 
         [HttpPut]
@@ -59,10 +59,10 @@ namespace API_Secrete.Controllers
             {
                 var newvip = new VIP(vip.Id, vip.Nom!.Value, vip.Prenom!.Value);
                 _repository.Ajouter(newvip);
-                return Ok();
+                return Ok(vip.Id);
             }
 
-            return BadRequest();
+            return BadRequest("La personne renseignée n'est pas conforme");
         }
 
         private static PersonneDto? Convertir(IPersonne? personne)
