@@ -57,7 +57,7 @@ namespace API_Secrete.Controllers
         {
             if(vip != null)
             {
-                var newvip = new VIP(vip.Id, vip.Nom!.Value, vip.Prenom!.Value);
+                var newvip = new VIP(vip.Id, vip.Nom!, vip.Prenom!);
                 _repository.Ajouter(newvip);
                 return Ok(vip.Id);
             }
@@ -75,9 +75,19 @@ namespace API_Secrete.Controllers
             return new PersonneDto
             {
                 Id = personne.Id,
-                Nom = personne.Nom,
-                Prenom = personne.Prenom
+                Nom = personne.Nom!.Value,
+                Prenom = personne.Prenom!.Value
             };
         }
-    }
+
+		private static IPersonne? Convertir(PersonneDto? personne)
+		{
+			if (personne == null)
+			{
+				return null;
+			}
+
+			return new Personne(personne.Id, personne.Nom!, personne.Prenom!);
+		}
+	}
 }

@@ -1,7 +1,7 @@
 using JeBalance.Domain.Model;
 using MediatR;
 
-namespace ParkNGo.Domain.Queries;
+namespace JeBalance.Domain.Queries;
 
 public class FindPersonnesQuery : IRequest<(IEnumerable<Personne> Results, int Total)>
 {

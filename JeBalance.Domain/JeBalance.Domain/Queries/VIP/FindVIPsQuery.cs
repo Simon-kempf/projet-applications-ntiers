@@ -1,0 +1,22 @@
+﻿using JeBalance.Domain.Model;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace JeBalance.Domain.Queries.VIP
+{
+	public class FindVIPsQuery : IRequest<(IEnumerable<Model.Utilisateurs.VIP> Results, int Total)>
+	{
+		public (int Limit, int Offset) Pagination { get; }
+		public FindVIPsSpecification Specification { get; }
+
+		public FindVIPsQuery(int limit, int offset, string? name, string? surname)
+		{
+			Pagination = (limit, offset);
+			Specification = new FindVIPsSpecification(name, surname);
+		}
+	}
+}

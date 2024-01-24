@@ -12,10 +12,10 @@ namespace API_Secrete.Controllers.Dto
         public int Id { get; set; }
 
         [JsonPropertyName("nom")]
-        public Nom? Nom { get ; set; }
+        public string? Nom { get ; set; }
 
         [JsonPropertyName("prenom")]
-        public Prenom? Prenom { get; set; }
+        public string? Prenom { get; set; }
 
         [JsonPropertyName("adresse")]
         public string? Adresse { get; set; }
