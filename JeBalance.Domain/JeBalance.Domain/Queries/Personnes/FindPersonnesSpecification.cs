@@ -2,7 +2,7 @@ using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using System.Linq.Expressions;
 
-namespace ParkNGo.Domain.Queries;
+namespace JeBalance.Domain.Queries;
 
 public class FindPersonnesSpecification : Specification<Personne>
 {

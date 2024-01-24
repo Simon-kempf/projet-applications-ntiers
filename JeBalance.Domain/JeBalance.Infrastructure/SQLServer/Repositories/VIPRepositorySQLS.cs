@@ -1,6 +1,7 @@
 ﻿using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Model.Utilisateurs;
+using JeBalance.Domain.Repositories;
 using JeBalance.Infrastructure.SQLServer.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Infrastructure.SQLServer.Repositories
 {
-	public class VIPRepositorySQLS
+	public class VIPRepositorySQLS : IVIPRepository
 	{
 		private readonly DatabaseContext _context;
 		public VIPRepositorySQLS(DatabaseContext databaseContext)
