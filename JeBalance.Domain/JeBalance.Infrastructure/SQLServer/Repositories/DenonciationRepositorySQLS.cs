@@ -1,11 +1,12 @@
 ﻿using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
+using JeBalance.Domain.Repositories;
 using JeBalance.Infrastructure.SQLServer;
 using JeBalance.Infrastructure.SQLServer.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace JeBalance.Infrastructure.SQLServer.Repositories;
-public class DenonciationRepositorySQLS
+public class DenonciationRepositorySQLS : IDenonciationRepository
 {
     private readonly DatabaseContext _context;
     public DenonciationRepositorySQLS(DatabaseContext databaseContext)
@@ -52,4 +53,14 @@ public class DenonciationRepositorySQLS
         IEnumerable<Denonciation> results = dbSet.ToList();
         return Task.FromResult((results, results.Count()));
     }
+
+	public Task<Denonciation> GetOne(int id)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task<int> Update(int id, Denonciation T)
+	{
+		throw new NotImplementedException();
+	}
 }

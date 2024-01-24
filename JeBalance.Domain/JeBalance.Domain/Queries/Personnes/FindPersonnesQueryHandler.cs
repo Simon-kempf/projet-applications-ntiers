@@ -1,8 +1,8 @@
 using JeBalance.Domain.Model;
 using MediatR;
-using ParkNGo.Domain.Repositories;
+using JeBalance.Domain.Repositories;
 
-namespace ParkNGo.Domain.Queries;
+namespace JeBalance.Domain.Queries;
 
 public class FindPersonnesQueryHandler : IRequestHandler<FindPersonnesQuery, (IEnumerable<Personne> Results, int Total)>
 {
