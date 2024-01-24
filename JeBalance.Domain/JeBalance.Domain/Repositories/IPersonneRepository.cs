@@ -1,7 +1,7 @@
 ﻿using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 
-namespace ParkNGo.Domain.Repositories;
+namespace JeBalance.Domain.Repositories;
 
 public interface IPersonneRepository : Repository<Personne>
 {
