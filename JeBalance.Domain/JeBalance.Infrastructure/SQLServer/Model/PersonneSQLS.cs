@@ -10,19 +10,20 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Infrastructure.SQLServer.Model
 {
+	[Table("PERSONNES")]
 	public class PersonneSQLS : Personne
 	{
 		[Column("id")]
-		public new int Id { get; set; }
+		public int Id { get; set; }
 
 		[Column("nom")]
-		public new String Nom { get; set; } = new Nom(string.Empty).ToString()!;
+		public String Nom { get; set; }
 
 		[Column("prenom")]
-		public new String Prenom { get; set; } = new Prenom(string.Empty).ToString()!;
+		public String Prenom { get; set; }
 
 		[Column("statut")]
-		public new int Statut { get; set; } = 0;
+		public int Statut { get; set; }
 
 	}
 }

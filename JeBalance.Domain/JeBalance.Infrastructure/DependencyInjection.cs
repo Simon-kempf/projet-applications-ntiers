@@ -19,7 +19,6 @@ namespace JeBalance.Infrastructure
 		   cf.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
 			services.AddScoped<IDenonciationRepository, DenonciationRepositorySQLS>();
-			services.AddScoped<IVIPRepository, VIPRepositorySQLS>();
 			services.AddScoped<IPersonneRepository, PersonneRepositorySQLS>();
 
 			return services;

@@ -40,7 +40,7 @@ namespace API.Controllers
             var suspectDto = denonciation.Suspect;
             var suspect = new Personne(suspectDto!.Id, suspectDto.Nom!.Value, suspectDto.Prenom!.Value);
 
-            var _denonciation = new Denonciation(DateTime.Now, _repository.Lister().Count(), informateur, suspect, denonciation.Delit!.Value, denonciation.PaysEvasion!.Value);
+            var _denonciation = new Denonciation(DateTime.Now, _repository.Lister().Count(), informateur, suspect, denonciation.Delit!.Value, denonciation.PaysEvasion!.Value, new Reponse());
 
             _repository.Ajouter(_denonciation);
 

@@ -4,6 +4,7 @@ using JeBalance.Infrastructure.SQLServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240127150416_initialDenonciation10")]
+    partial class initialDenonciation10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +41,9 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("horodatage");
 
-                    b.Property<int>("InformateurId")
-                        .HasColumnType("int")
-                        .HasColumnName("fk_informateur");
+                    b.Property<int?>("InformateurId")
+                        .IsRequired()
+                        .HasColumnType("int");
 
                     b.Property<string>("PaysEvasion")
                         .IsRequired()
@@ -61,9 +63,9 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("statutSuspect");
 
-                    b.Property<int>("SuspectId")
-                        .HasColumnType("int")
-                        .HasColumnName("fk_suspect");
+                    b.Property<int?>("SuspectId")
+                        .IsRequired()
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

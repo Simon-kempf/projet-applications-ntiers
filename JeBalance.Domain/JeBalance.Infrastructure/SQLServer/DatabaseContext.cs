@@ -15,8 +15,8 @@ namespace JeBalance.Infrastructure.SQLServer
 		public const string DEFAULT_SCHEMA = "app";
 		public DbSet<PersonneSQLS> Personnes { get; set; }
 		public DbSet<DenonciationSQLS> Denonciations { get; set; }
-		public DbSet<ReponseSQLS> Reponses { get; set; }
-		public DbSet<PersonneSQLS> VIPs { get; set; }
+		//public DbSet<ReponseSQLS> Reponses { get; set; }
+		//public DbSet<PersonneSQLS> VIPs { get; set; }
 
 		public DatabaseContext()
 		{
@@ -27,10 +27,16 @@ namespace JeBalance.Infrastructure.SQLServer
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+
+			foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+			{
+				relationship.DeleteBehavior = DeleteBehavior.Restrict;
+			}
+
 			modelBuilder.ApplyConfiguration(new DenonciationConfiguration());
 			modelBuilder.ApplyConfiguration(new PersonneConfiguration());
-			modelBuilder.ApplyConfiguration(new ReponseConfiguration());
-			modelBuilder.ApplyConfiguration(new VIPConfiguration());
+			//modelBuilder.ApplyConfiguration(new ReponseConfiguration());
+			//modelBuilder.ApplyConfiguration(new VIPConfiguration());
 			base.OnModelCreating(modelBuilder);
 		}
 		protected override void OnConfiguring(DbContextOptionsBuilder

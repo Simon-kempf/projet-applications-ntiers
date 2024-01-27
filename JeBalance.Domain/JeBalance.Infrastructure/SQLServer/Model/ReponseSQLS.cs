@@ -10,8 +10,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 {
     public class ReponseSQLS : Reponse
     {
-        [Column("id")]
-        public new int Id { get; set; }
+        
         [Column("horodatage")]
         public new DateTime Horodatage { get; set; }
         [Column("type")]

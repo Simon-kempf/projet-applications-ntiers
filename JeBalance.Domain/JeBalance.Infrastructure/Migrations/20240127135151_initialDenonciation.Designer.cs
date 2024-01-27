@@ -4,6 +4,7 @@ using JeBalance.Infrastructure.SQLServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240127135151_initialDenonciation")]
+    partial class initialDenonciation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,10 +50,9 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("paysEvasion");
 
-                    b.Property<string>("Reponse")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("reponse");
+                    b.Property<int>("ReponseId")
+                        .HasColumnType("int")
+                        .HasColumnName("fk_reponse");
 
                     b.Property<int>("StatutInfo")
                         .HasColumnType("int")
@@ -68,6 +69,8 @@ namespace JeBalance.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("InformateurId");
+
+                    b.HasIndex("ReponseId");
 
                     b.HasIndex("SuspectId");
 
@@ -104,21 +107,55 @@ namespace JeBalance.Infrastructure.Migrations
                     b.ToTable("PERSONNES", "app");
                 });
 
+            modelBuilder.Entity("JeBalance.Infrastructure.SQLServer.Model.ReponseSQLS", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Horodatage")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("horodatage");
+
+                    b.Property<int>("Retribution")
+                        .HasColumnType("int")
+                        .HasColumnName("retribution");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnName("type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReponseSQLS");
+                });
+
             modelBuilder.Entity("JeBalance.Infrastructure.SQLServer.Model.DenonciationSQLS", b =>
                 {
                     b.HasOne("JeBalance.Infrastructure.SQLServer.Model.PersonneSQLS", "Informateur")
                         .WithMany()
                         .HasForeignKey("InformateurId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JeBalance.Infrastructure.SQLServer.Model.ReponseSQLS", "Reponse")
+                        .WithMany()
+                        .HasForeignKey("ReponseId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("JeBalance.Infrastructure.SQLServer.Model.PersonneSQLS", "Suspect")
                         .WithMany()
                         .HasForeignKey("SuspectId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Informateur");
+
+                    b.Navigation("Reponse");
 
                     b.Navigation("Suspect");
                 });
