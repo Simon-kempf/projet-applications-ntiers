@@ -42,5 +42,10 @@ namespace JeBalance.Domain.Model
 		}
 
 		public Personne() : base(0) { }
-    }
+
+		public string ToSQLSPersonne()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

@@ -35,14 +35,12 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 		public new string PaysEvasion { get; set; }
 
 
-		[Column("fk_informateur")]
-		public int InformateurId { get; set; }
-		public virtual PersonneSQLS Informateur { get; set; }
+		[Column("informateur")]
+		public string Informateur { get; set; }
 
 
-		[Column("fk_suspect")]
-		public int SuspectId { get; set; }
-		public virtual PersonneSQLS Suspect { get; set; }
+		[Column("suspect")]
+		public string Suspect { get; set; }
 
 
 		[Column("reponse")]

@@ -16,14 +16,10 @@ namespace JeBalance.Infrastructure.SQLServer.Configurations
             builder
                 .ToTable("DENONCIATIONS", DatabaseContext.DEFAULT_SCHEMA)
                 .HasKey(denonciation => denonciation.Id);
-            builder.HasOne(denonciation => denonciation.Informateur)
-                .WithMany()
-				.OnDelete(DeleteBehavior.NoAction)
-				.HasForeignKey(denonciation => denonciation.InformateurId);
-			builder.HasOne(denonciation => denonciation.Suspect)
-				.WithMany()
-				.OnDelete(DeleteBehavior.NoAction)
-				.HasForeignKey(denonciation => denonciation.SuspectId);
+			builder.Property(denonciation => denonciation.Informateur)
+				.IsRequired();
+			builder.Property(denonciation => denonciation.Suspect)
+				.IsRequired();
 			builder.Property(denonciation => denonciation.Delit)
                 .IsRequired();
             builder.Property(denonciation => denonciation.StatutInfo)

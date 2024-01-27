@@ -27,12 +27,6 @@ namespace JeBalance.Infrastructure.SQLServer
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-
-			foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-			{
-				relationship.DeleteBehavior = DeleteBehavior.Restrict;
-			}
-
 			modelBuilder.ApplyConfiguration(new DenonciationConfiguration());
 			modelBuilder.ApplyConfiguration(new PersonneConfiguration());
 			//modelBuilder.ApplyConfiguration(new ReponseConfiguration());

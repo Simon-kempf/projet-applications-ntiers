@@ -39,9 +39,10 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("horodatage");
 
-                    b.Property<int>("InformateurId")
-                        .HasColumnType("int")
-                        .HasColumnName("fk_informateur");
+                    b.Property<string>("Informateur")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("informateur");
 
                     b.Property<string>("PaysEvasion")
                         .IsRequired()
@@ -61,15 +62,12 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("statutSuspect");
 
-                    b.Property<int>("SuspectId")
-                        .HasColumnType("int")
-                        .HasColumnName("fk_suspect");
+                    b.Property<string>("Suspect")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("suspect");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InformateurId");
-
-                    b.HasIndex("SuspectId");
 
                     b.ToTable("DENONCIATIONS", "app");
                 });
@@ -102,25 +100,6 @@ namespace JeBalance.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PERSONNES", "app");
-                });
-
-            modelBuilder.Entity("JeBalance.Infrastructure.SQLServer.Model.DenonciationSQLS", b =>
-                {
-                    b.HasOne("JeBalance.Infrastructure.SQLServer.Model.PersonneSQLS", "Informateur")
-                        .WithMany()
-                        .HasForeignKey("InformateurId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("JeBalance.Infrastructure.SQLServer.Model.PersonneSQLS", "Suspect")
-                        .WithMany()
-                        .HasForeignKey("SuspectId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Informateur");
-
-                    b.Navigation("Suspect");
                 });
 #pragma warning restore 612, 618
         }

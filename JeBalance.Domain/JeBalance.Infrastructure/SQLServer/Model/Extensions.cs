@@ -17,20 +17,42 @@ namespace JeBalance.Infrastructure.SQLServer.Model
             return new Denonciation(
                 denonciation.Horodatage,
 				denonciation.Id,
-                new Personne(denonciation.InformateurId, null, null),
-                new Personne(denonciation.SuspectId, null, null),
+                denonciation.Informateur.ToDomainPersonne(),
+				denonciation.Suspect.ToDomainPersonne(),
                 (Delit)denonciation.Delit,
                 denonciation.PaysEvasion,
 				denonciation.Reponse.ToDomain()
 			);
         }
+
+		public static string ToSQLSPersonne(this Personne personne)
+		{
+			if (personne == null)
+				return "";
+			return personne.Id + ";" + personne.Nom + ";" + personne.Prenom + ";" + personne.Statut;
+		}
+
+		public static Personne ToDomainPersonne(this string personne)
+		{
+			if (personne == "")
+				return null;
+			string[] composantes = personne.Split(";");
+
+			return new Personne(
+				int.Parse(composantes[0]),
+				composantes[1],
+				composantes[2],
+				(Statut)Enum.Parse(typeof(Statut), composantes[3])
+			);
+		}
+
         public static DenonciationSQLS ToSQLS(this Denonciation denonciation)
         {
 			return new DenonciationSQLS
 			{
 				Id = denonciation.Id,
-				InformateurId = denonciation.Informateur!.Id,
-				SuspectId = denonciation.Suspect!.Id,
+				Informateur = denonciation.Informateur!.ToSQLSPersonne(),
+				Suspect = denonciation.Suspect.ToSQLSPersonne(),
 				Delit = (int)denonciation.Delit!.Value,
 				StatutInfo = (int)denonciation.Informateur!.Statut,
 				StatutSuspect = (int)denonciation.Suspect!.Statut,

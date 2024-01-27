@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240127144944_initialDenonciation7")]
-    partial class initialDenonciation7
+    [Migration("20240127153952_t0")]
+    partial class t0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,9 +41,10 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("horodatage");
 
-                    b.Property<int>("InformateurId")
-                        .HasColumnType("int")
-                        .HasColumnName("fk_informateur");
+                    b.Property<string>("Informateur")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("informateur");
 
                     b.Property<string>("PaysEvasion")
                         .IsRequired()
@@ -63,15 +64,12 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("statutSuspect");
 
-                    b.Property<int>("SuspectId")
-                        .HasColumnType("int")
-                        .HasColumnName("fk_suspect");
+                    b.Property<string>("Suspect")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("suspect");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InformateurId");
-
-                    b.HasIndex("SuspectId");
 
                     b.ToTable("DENONCIATIONS", "app");
                 });
@@ -104,23 +102,6 @@ namespace JeBalance.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PERSONNES", "app");
-                });
-
-            modelBuilder.Entity("JeBalance.Infrastructure.SQLServer.Model.DenonciationSQLS", b =>
-                {
-                    b.HasOne("JeBalance.Infrastructure.SQLServer.Model.PersonneSQLS", "Informateur")
-                        .WithMany()
-                        .HasForeignKey("InformateurId")
-                        .IsRequired();
-
-                    b.HasOne("JeBalance.Infrastructure.SQLServer.Model.PersonneSQLS", "Suspect")
-                        .WithMany()
-                        .HasForeignKey("SuspectId")
-                        .IsRequired();
-
-                    b.Navigation("Informateur");
-
-                    b.Navigation("Suspect");
                 });
 #pragma warning restore 612, 618
         }
