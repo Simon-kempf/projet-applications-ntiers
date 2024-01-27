@@ -23,6 +23,6 @@ namespace JeBalance.Domain.Queries.VIP
 					? vip => vip.Nom!.Value == _nameSearch
 					: vip => vip.Nom!.Value == _nameSearch && vip.Prenom!.Value == _surnameSearch
 				);
-				}
+		}
 	}
 }

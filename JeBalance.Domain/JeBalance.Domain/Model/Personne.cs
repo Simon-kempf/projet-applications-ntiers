@@ -37,6 +37,14 @@ namespace JeBalance.Domain.Model
 			Statut = statut;
 		}
 
+		public Personne(string nom, string prenom, Statut statut) :
+	   base(0)
+		{
+			Nom = new Nom(nom);
+			Prenom = new Prenom(prenom);
+			Statut = statut;
+		}
+
 		public Personne(int id) : base(id)
 		{
 		}

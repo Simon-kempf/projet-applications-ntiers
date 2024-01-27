@@ -69,21 +69,6 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 			return Task.FromResult((results, _context.Personnes.Count()));
 		}
 
-		public Task<(IEnumerable<Personne> Results, int Total)> Find(int limit, int offset, Specification<Personne>[] specifications)
-		{
-			var results = new List<Personne>();
-			for (int i = 0; i < specifications.Length; i++)
-			{
-				_ = results.Concat(_context.Personnes
-					.Where(specifications[i].IsSatisfiedBy)
-					.Skip(offset)
-					.Take(limit)
-					.Select(personne => personne.ToDomain())
-					);
-			}
-			return Task.FromResult(((IEnumerable<Personne>)results, _context.Personnes.Count()));
-		}
-
 		public Task<IEnumerable<Personne>> FindAll(params Specification<Personne>[] specifications)
 		{
 			throw new NotImplementedException();

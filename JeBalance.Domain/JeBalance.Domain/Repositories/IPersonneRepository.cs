@@ -9,10 +9,7 @@ public interface IPersonneRepository : Repository<Personne>
 
     Task<int> CreateAll(IEnumerable<Personne> newCurrentPersons);
 
-    Task<(IEnumerable<Personne> Results, int Total)> Find(
-        int limit,
-        int offset,
-        params Specification<Personne>[] specifications);
+    Task<(IEnumerable<Personne> Results, int Total)> Find(int limit, int offset, Specification<Personne> specifications);
     
     Task<bool> HasAny(Specification<Personne> specifications);
     
