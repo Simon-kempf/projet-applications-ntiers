@@ -1,4 +1,5 @@
 ﻿using JeBalance.Domain.Contracts;
+using JeBalance.Domain.Model;
 using JeBalance.Domain.Model.Utilisateurs;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Domain.Repositories
 {
-	public interface IVIPRepository : Repository<VIP>
+	public interface IVIPRepository : Repository<Personne>
 	{
 	}
 }

@@ -107,7 +107,7 @@ namespace API.Controllers
                 Reponse = Convertir(denonciation.Reponse)
             };
         }
-        private static PersonneDto? Convertir(IPersonne? personne)
+        private static PersonneDto? Convertir(Personne? personne)
         {
             if (personne == null)
             {

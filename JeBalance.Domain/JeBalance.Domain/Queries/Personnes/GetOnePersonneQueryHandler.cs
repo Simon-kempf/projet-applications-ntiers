@@ -1,4 +1,5 @@
 using JeBalance.Domain.Model;
+using JeBalance.Domain.Queries;
 using MediatR;
 using JeBalance.Domain.Repositories;
 

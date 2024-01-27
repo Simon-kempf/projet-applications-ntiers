@@ -2,7 +2,7 @@
 
 namespace JeBalance.Domain.Model.Utilisateurs
 {
-    public class VIP : IPersonne
+    public class VIP : Personne
     {
         public VIP(string nom, string prenom) : base(0)
         {

@@ -4,16 +4,16 @@ namespace API_Secrete.Business
 {
     public class VIPList
     {
-        private readonly List<IPersonne> _vips;
+        private readonly List<Personne> _vips;
 
-        public IReadOnlyCollection<IPersonne> Vips => _vips;
+        public IReadOnlyCollection<Personne> Vips => _vips;
 
         public VIPList()
         {
             _vips = [];
         }
 
-        public void AjouterVIP(IPersonne personne)
+        public void AjouterVIP(Personne personne)
         {
             if(RechercherVIP(personne.Id) == null)
             {
@@ -21,12 +21,12 @@ namespace API_Secrete.Business
             }
         }
 
-        public IPersonne? RechercherVIP(int id)
+        public Personne? RechercherVIP(int id)
         {
             return _vips.FirstOrDefault(p => p.Id == id);
         }
 
-        public void SupprimerVIP(IPersonne person)
+        public void SupprimerVIP(Personne person)
         {
             _vips.Remove(person);
         }
