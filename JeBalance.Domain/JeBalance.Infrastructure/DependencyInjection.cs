@@ -20,6 +20,7 @@ namespace JeBalance.Infrastructure
 
 			services.AddScoped<IDenonciationRepository, DenonciationRepositorySQLS>();
 			services.AddScoped<IPersonneRepository, PersonneRepositorySQLS>();
+			services.AddScoped<IVIPRepository, VIPRepositorySQLS>();
 
 			return services;
 		}

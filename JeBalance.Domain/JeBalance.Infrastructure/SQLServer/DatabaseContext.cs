@@ -16,7 +16,7 @@ namespace JeBalance.Infrastructure.SQLServer
 		public DbSet<PersonneSQLS> Personnes { get; set; }
 		public DbSet<DenonciationSQLS> Denonciations { get; set; }
 		//public DbSet<ReponseSQLS> Reponses { get; set; }
-		//public DbSet<PersonneSQLS> VIPs { get; set; }
+		public DbSet<PersonneSQLS> VIPs { get; set; }
 
 		public DatabaseContext()
 		{

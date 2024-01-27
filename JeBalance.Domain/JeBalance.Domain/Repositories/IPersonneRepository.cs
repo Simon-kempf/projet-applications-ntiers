@@ -5,7 +5,7 @@ namespace JeBalance.Domain.Repositories;
 
 public interface IPersonneRepository : Repository<Personne>
 {
-    Task<bool> Create(Personne personne);
+    Task<int> Create(Personne personne);
 
     Task<int> CreateAll(IEnumerable<Personne> newCurrentPersons);
 
@@ -14,9 +14,8 @@ public interface IPersonneRepository : Repository<Personne>
         int offset,
         params Specification<Personne>[] specifications);
     
-    Task<bool> HasAny(params Specification<Personne>[] specifications);
+    Task<bool> HasAny(Specification<Personne> specifications);
     
     Task<IEnumerable<Personne>> FindAll(params Specification<Personne>[] specifications);
 
-    Task<int> RemoveAll(params Specification<Personne>[] specifications);
 }
