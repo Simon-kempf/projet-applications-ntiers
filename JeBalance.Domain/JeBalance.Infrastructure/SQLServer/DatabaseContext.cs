@@ -27,7 +27,10 @@ namespace JeBalance.Infrastructure.SQLServer
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.ApplyConfiguration(new DenonciationConfiguration());
 			modelBuilder.ApplyConfiguration(new PersonneConfiguration());
+			modelBuilder.ApplyConfiguration(new ReponseConfiguration());
+			modelBuilder.ApplyConfiguration(new VIPConfiguration());
 			base.OnModelCreating(modelBuilder);
 		}
 		protected override void OnConfiguring(DbContextOptionsBuilder
