@@ -14,8 +14,8 @@ namespace JeBalance.Domain.Model
         {
         }
         public DateTime? Horodatage { get; set; }
-        public IPersonne? Informateur { get; set; }
-        public IPersonne? Suspect { get; set; }
+        public Personne? Informateur { get; set; }
+        public Personne? Suspect { get; set; }
         public Delit? Delit { get; set; }
         public PaysEvasion? PaysEvasion { get; set; }
         public Reponse? Reponse { get; set; }

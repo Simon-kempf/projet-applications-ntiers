@@ -65,7 +65,7 @@ namespace API_Secrete.Controllers
             return BadRequest("La personne renseignée n'est pas conforme");
         }
 
-        private static PersonneDto? Convertir(IPersonne? personne)
+        private static PersonneDto? Convertir(Personne? personne)
         {
             if (personne == null)
             {
@@ -80,7 +80,7 @@ namespace API_Secrete.Controllers
             };
         }
 
-		private static IPersonne? Convertir(PersonneDto? personne)
+		private static Personne? Convertir(PersonneDto? personne)
 		{
 			if (personne == null)
 			{

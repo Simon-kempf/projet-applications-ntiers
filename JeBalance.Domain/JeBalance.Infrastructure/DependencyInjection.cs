@@ -1,4 +1,6 @@
-﻿using JeBalance.Domain.Repositories;
+﻿using JeBalance.Domain.Model.Utilisateurs;
+using JeBalance.Domain.Repositories;
+using JeBalance.Infrastructure.SQLServer.Model;
 using JeBalance.Infrastructure.SQLServer.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
