@@ -26,5 +26,9 @@ namespace JeBalance.Domain.Model
             Type = type;
             if (retribution != null) { Retribution = retribution; }
         }
-    }
+
+		public Reponse() : base(0)
+		{
+		}
+	}
 }
