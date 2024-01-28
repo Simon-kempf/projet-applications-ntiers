@@ -13,16 +13,26 @@ namespace JeBalance.Domain.Commands.DenonciationCommands
     {
         public Denonciation Denonciation { get; }
 
-		public CreateDenonciationCommand(DateTime Horodatage,
-            Personne Informateur, 
-            Personne Suspect,
-            Delit Delit,
-            string? PaysEvasion,
-            Reponse Reponse) => Denonciation = new Denonciation(Horodatage,
-			                                                    Informateur,
-			                                                    Suspect,
+		public CreateDenonciationCommand(
+            string NomInformateur,
+			string PrenomInformateur,
+			int CodePostalInformateur,
+			string NomDeCommuneInformateur,
+			int NumeroDeVoieInformateur,
+			string NomDeVoieInformateur,
+			string NomSuspect,
+			string PrenomSuspect,
+			int CodePostalSuspect,
+			string NomDeCommuneSuspect,
+			int NumeroDeVoieSuspect,
+			string NomDeVoieSuspect,
+			Delit Delit,
+            string? PaysEvasion
+			) => Denonciation = new Denonciation(DateTime.Now,
+			                                                    new Personne(NomInformateur, PrenomInformateur, Statut.INFORMATEUR, new Adresse(CodePostalInformateur, NomDeCommuneInformateur, NomDeVoieInformateur, NumeroDeVoieInformateur)),
+			                                                    new Personne(NomSuspect, PrenomSuspect, Statut.SUSPECT, new Adresse(CodePostalSuspect, NomDeCommuneSuspect, NomDeVoieSuspect, NumeroDeVoieSuspect)),
 			                                                    Delit,
 			                                                    PaysEvasion,
-			                                                    Reponse);
+			                                                    new Reponse());
     }
 }

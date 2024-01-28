@@ -25,6 +25,22 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			);
         }
 
+		public static DenonciationSQLS ToSQLS(this Denonciation denonciation)
+		{
+			return new DenonciationSQLS
+			{
+				Id = denonciation.Id,
+				Informateur = denonciation.Informateur!.ToSQLSPersonne(),
+				Suspect = denonciation.Suspect!.ToSQLSPersonne(),
+				Delit = (int)denonciation.Delit!.Value,
+				StatutInfo = (int)denonciation.Informateur!.Statut,
+				StatutSuspect = (int)denonciation.Suspect!.Statut,
+				Horodatage = denonciation.Horodatage!.Value,
+				PaysEvasion = denonciation.PaysEvasion!.Value,
+				Reponse = denonciation.Reponse!.ToSQLS()
+			};
+		}
+
 		public static string ToSQLSPersonne(this Personne personne)
 		{
 			if (personne == null)
@@ -70,22 +86,6 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			return result;
 		}
 
-        public static DenonciationSQLS ToSQLS(this Denonciation denonciation)
-        {
-			return new DenonciationSQLS
-			{
-				Id = denonciation.Id,
-				Informateur = denonciation.Informateur!.ToSQLSPersonne(),
-				Suspect = denonciation.Suspect!.ToSQLSPersonne(),
-				Delit = (int)denonciation.Delit!.Value,
-				StatutInfo = (int)denonciation.Informateur!.Statut,
-				StatutSuspect = (int)denonciation.Suspect!.Statut,
-				Horodatage = denonciation.Horodatage!.Value,
-				PaysEvasion = denonciation.PaysEvasion!.Value,
-				Reponse = denonciation.Reponse!.ToSQLS()
-			};
-        }
-
 		public static Personne ToDomain(this PersonneSQLS personne)
 		{
 			return new Personne(
@@ -121,7 +121,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 					: (Domain.Model.Type)Enum.Parse(typeof(Domain.Model.Type), composantes[2]);
 			int retribution = (composantes[1] == null)
 					? 0
-					: 0;//TODO
+					: int.Parse(composantes[1]);//TODO
 
 			return new Reponse(date, type, retribution);
 		}

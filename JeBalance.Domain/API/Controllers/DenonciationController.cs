@@ -36,18 +36,19 @@ namespace API.Controllers
 
 
 		[HttpPost]
-		public async Task<IActionResult> Post([FromBody] DenonciationAPI resource)
+		public async Task<IActionResult> Post([FromBody] DenonciationCreationAPI resource)
 		{
-			var command = new CreateDenonciationCommand(resource.Horodatage, resource.Informateur, resource.Suspect, resource.Delit, resource.PaysEvasion, resource.Reponse);
+			var command = new CreateDenonciationCommand(resource.NomInformateur, resource.PrenomInformateur, resource.CodePostalInformateur, resource.NomDeCommuneInformateur, resource.NumeroDeVoieInformateur, resource.NomDeVoieInformateur,
+				resource.NomSuspect, resource.PrenomSuspect, resource.CodePostalSuspect, resource.NomDeCommuneSuspect, resource.NumeroDeVoieSuspect, resource.NomDeVoieSuspect, resource.Delit, resource.PaysEvasion);
 			var id = await _mediator.Send(command);
 			return Ok(id);
 		}
 
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Put(int id, [FromBody] DenonciationAPI resource)
+		public async Task<IActionResult> Put(int id, [FromBody] DenonciationUpdateAPI resource)
 		{
-			var command = new UpdateDenonciationCommand(id, resource.Horodatage, resource.Informateur, resource.Suspect, resource.Delit, resource.PaysEvasion, resource.Reponse);
+			var command = new UpdateDenonciationCommand(id, resource.TypeReponse, resource.Retribution);
 			await _mediator.Send(command);
 			return Ok(id);
 		}

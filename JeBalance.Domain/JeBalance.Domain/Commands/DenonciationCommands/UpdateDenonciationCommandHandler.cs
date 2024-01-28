@@ -17,7 +17,7 @@ namespace JeBalance.Domain.Commands.DenonciationCommands
 
         public Task<int> Handle(UpdateDenonciationCommand command, CancellationToken cancellationToken)
         {
-            return _repository.Update(command.Id, command.Denonciation);
+            return _repository.Update(command.Id, command.Reponse);
         }
     }
 }

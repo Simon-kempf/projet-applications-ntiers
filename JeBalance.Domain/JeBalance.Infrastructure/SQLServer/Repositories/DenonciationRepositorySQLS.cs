@@ -54,14 +54,22 @@ public class DenonciationRepositorySQLS : IDenonciationRepository
         return Task.FromResult((results, results.Count()));
     }
 
-	public Task<int> Update(int id, Denonciation T)
+	public async Task<int> Update(int id, Reponse reponse)
 	{
-		throw new NotImplementedException();
+		var denonciationToUpdate = _context.Denonciations.First(place => place.Id == id);
+		denonciationToUpdate.Reponse = reponse.ToSQLS();
+		await _context.SaveChangesAsync();
+		return id;
 	}
 
 	public async Task<Denonciation> GetOne(int id)
 	{
 		var denonciation = await _context.Denonciations.FirstAsync(denonciation => denonciation.Id == id);
 		return denonciation.ToDomain();
+	}
+
+	Task<int> Repository<Denonciation>.Update(int id, Denonciation T)
+	{
+		throw new NotImplementedException();
 	}
 }

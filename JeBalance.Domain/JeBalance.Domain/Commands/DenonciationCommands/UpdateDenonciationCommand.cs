@@ -11,23 +11,14 @@ namespace JeBalance.Domain.Commands.DenonciationCommands
     public class UpdateDenonciationCommand : IRequest<int>
     {
         public int Id { get; }
-        public Denonciation Denonciation { get; }
+        public Reponse Reponse { get; }
 
         public UpdateDenonciationCommand(int id, 
-            DateTime Horodatage,
-			Personne Informateur,
-			Personne Suspect,
-			Delit Delit,
-			string? PaysEvasion,
-			Reponse Reponse)
+            int TypeReponse,
+            int Retribution)
         {
             Id = id;
-            Denonciation = new Denonciation(Horodatage,
-											Informateur,
-											Suspect,
-											Delit,
-											PaysEvasion,
-											Reponse);
+            Reponse = new Reponse(DateTime.Now, (Model.Type) TypeReponse, Retribution);
         }
     }
 }
