@@ -15,8 +15,8 @@ namespace JeBalance.Infrastructure.SQLServer
 		public const string DEFAULT_SCHEMA = "app";
 		public DbSet<PersonneSQLS> Personnes { get; set; }
 		public DbSet<DenonciationSQLS> Denonciations { get; set; }
-		public DbSet<ReponseSQLS> Reponses { get; set; }
-		public DbSet<VIPSQLS> VIPs { get; set; }
+		//public DbSet<ReponseSQLS> Reponses { get; set; }
+		public DbSet<PersonneSQLS> VIPs { get; set; }
 
 		public DatabaseContext()
 		{
@@ -27,7 +27,10 @@ namespace JeBalance.Infrastructure.SQLServer
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.ApplyConfiguration(new DenonciationConfiguration());
 			modelBuilder.ApplyConfiguration(new PersonneConfiguration());
+			//modelBuilder.ApplyConfiguration(new ReponseConfiguration());
+			//modelBuilder.ApplyConfiguration(new VIPConfiguration());
 			base.OnModelCreating(modelBuilder);
 		}
 		protected override void OnConfiguring(DbContextOptionsBuilder

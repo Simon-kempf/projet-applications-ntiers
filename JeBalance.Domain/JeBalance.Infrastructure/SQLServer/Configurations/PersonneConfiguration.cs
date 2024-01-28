@@ -16,14 +16,14 @@ namespace JeBalance.Infrastructure.SQLServer.Configurations
 		public void Configure(EntityTypeBuilder<PersonneSQLS> builder)
 		{
 			builder
- .ToTable("PERSONNES", DatabaseContext.DEFAULT_SCHEMA)
- .HasKey(personne => personne.Id);
+				.ToTable("PERSONNES", DatabaseContext.DEFAULT_SCHEMA)
+				.HasKey(personne => personne.Id);
 			builder.Property(personne => personne.Nom)
-			.IsRequired().HasMaxLength(Nom.MAX_LENGTH);
+				.IsRequired().HasMaxLength(Nom.MAX_LENGTH);
 			builder.Property(personne => personne.Prenom)
-			.IsRequired().HasMaxLength(Prenom.MAX_LENGTH);
+				.IsRequired().HasMaxLength(Prenom.MAX_LENGTH);
 			builder.Property(personne => personne.Statut)
-			.IsRequired().HasColumnType("int");
+				.IsRequired().HasColumnType("int");
 		}
 	}
 }

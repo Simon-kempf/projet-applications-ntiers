@@ -12,7 +12,7 @@ using JeBalance.Domain.Model.Utilisateurs;
 
 namespace JeBalance.Infrastructure.SQLServer.Model
 {
-    public class VIPSQLS : VIP
+    public class VIPSQLS : Personne
     {
         [Column("id")]
         public new int Id { get; set; }

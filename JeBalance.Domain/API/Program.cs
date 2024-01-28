@@ -12,10 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IDenonciationRepository, DenonciationRepository>();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
-
-options.UseSqlServer(builder.Configuration.GetConnectionString("localdb")),
-contextLifetime: ServiceLifetime.Scoped,
-optionsLifetime: ServiceLifetime.Transient);
+	options.UseSqlServer(builder.Configuration.GetConnectionString("localdb")),
+	contextLifetime: ServiceLifetime.Scoped,
+	optionsLifetime: ServiceLifetime.Transient);
 
 builder.Services.AddInfrastructure();
 builder.Services.AddAPI();

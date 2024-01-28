@@ -19,19 +19,20 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 		{
 			_context = databaseContext;
 		}
-		public Task<int> Count(Specification<VIP> specification)
+		public Task<int> Count(Specification<Personne> specification)
 		{
 			return Task.FromResult(_context.VIPs
 			.Where(specification.IsSatisfiedBy)
 			.Count());
 		}
-		public async Task<int> Create(VIP vip)
+		public async Task<int> Create(Personne vip)
 		{
-			VIPSQLS vipToSave = vip.ToSQLS();
+			PersonneSQLS vipToSave = vip.ToSQLS();
 			await _context.VIPs.AddAsync(vipToSave);
 			await _context.SaveChangesAsync();
 			return vipToSave.Id;
 		}
+
 		public async Task<bool> Delete(int id)
 		{
 			try
@@ -49,30 +50,33 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 				return false;
 			}
 		}
-		public Task<(IEnumerable<VIP> Results, int Total)> Find(
+		
+		public Task<(IEnumerable<Personne> Results, int Total)> Find(
 			int limit,
 			int offset,
-			Specification<VIP> specification)
+			Specification<Personne> specification)
 		{
 			var results = _context.VIPs
 			.Where(specification.IsSatisfiedBy)
 			.Skip(offset)
 			.Take(limit)
+			.AsEnumerable()
 			.Select(vip => vip.ToDomain());
 			return Task.FromResult((results, _context.VIPs.Count()));
 		}
-		public async Task<VIP> GetOne(int id)
+
+		public async Task<Personne> GetOne(int id)
 		{
 			var vip = await _context.VIPs.FirstAsync(vip => vip.Id == id);
 			return vip.ToDomain();
 		}
-		public Task<bool> HasAny(Specification<VIP> specification)
+		public Task<bool> HasAny(Specification<Personne> specification)
 		{
 			return _context.VIPs.AnyAsync(vip =>
 		   specification.IsSatisfiedBy(vip));
 		}
 		
-		public async Task<int> Update(int id, VIP vip)
+		public async Task<int> Update(int id, Personne vip)
 		{
 			var vipToUpdate = _context.VIPs.First(vip => vip.Id == id);
 			vipToUpdate.Nom = vip.Nom!.Value;

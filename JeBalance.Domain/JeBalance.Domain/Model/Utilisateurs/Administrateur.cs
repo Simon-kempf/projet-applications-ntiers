@@ -2,7 +2,7 @@
 
 namespace JeBalance.Domain.Model.Utilisateurs
 {
-    public class Administrateur : IPersonne
+    public class Administrateur : Personne
     {
         public Administrateur(string nom, string prenom) : base(0)
         {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240118143126_migration0")]
-    partial class migration0
+    [Migration("20240128101321_personneAdresse0")]
+    partial class personneAdresse0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,13 +41,20 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("horodatage");
 
-                    b.Property<int>("IdInformateur")
-                        .HasColumnType("int")
-                        .HasColumnName("idInformateur");
+                    b.Property<string>("Informateur")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("informateur");
 
-                    b.Property<int>("IdSuspect")
-                        .HasColumnType("int")
-                        .HasColumnName("idSuspect");
+                    b.Property<string>("PaysEvasion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("paysEvasion");
+
+                    b.Property<string>("Reponse")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("reponse");
 
                     b.Property<int>("StatutInfo")
                         .HasColumnType("int")
@@ -57,9 +64,14 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("statutSuspect");
 
+                    b.Property<string>("Suspect")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("suspect");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Denonciations");
+                    b.ToTable("DENONCIATIONS", "app");
                 });
 
             modelBuilder.Entity("JeBalance.Infrastructure.SQLServer.Model.PersonneSQLS", b =>
@@ -70,6 +82,11 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Adresse")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("adresse");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -90,60 +107,6 @@ namespace JeBalance.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PERSONNES", "app");
-                });
-
-            modelBuilder.Entity("JeBalance.Infrastructure.SQLServer.Model.ReponseSQLS", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Horodatage")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("horodatage");
-
-                    b.Property<int>("Retribution")
-                        .HasColumnType("int")
-                        .HasColumnName("retribution");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasColumnName("type");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reponses");
-                });
-
-            modelBuilder.Entity("JeBalance.Infrastructure.SQLServer.Model.VIPSQLS", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Nom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nom");
-
-                    b.Property<string>("Prenom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("prenom");
-
-                    b.Property<int>("Statut")
-                        .HasColumnType("int")
-                        .HasColumnName("statut");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VIPs");
                 });
 #pragma warning restore 612, 618
         }
