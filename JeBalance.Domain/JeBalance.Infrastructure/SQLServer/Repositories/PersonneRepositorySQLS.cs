@@ -1,6 +1,8 @@
 ﻿using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
+using JeBalance.Infrastructure.SQLServer.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,31 +11,62 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Infrastructure.SQLServer.Repositories
 {
-	internal class PersonneRepositorySQLS : IPersonneRepository
+	public class PersonneRepositorySQLS : IPersonneRepository
 	{
-		public Task<bool> Create(Personne personne)
+
+		private readonly DatabaseContext _context;
+		public PersonneRepositorySQLS(DatabaseContext databaseContext)
 		{
-			throw new NotImplementedException();
+			_context = databaseContext;
 		}
+
+		public async Task<int> Create(Personne personne)
+		{
+			var personneToSave = personne.ToSQLS();
+			await _context.Personnes.AddAsync(personneToSave);
+			await _context.SaveChangesAsync();
+			return personneToSave.Id;
+		}
+
+		public Task<int> Count(Specification<Personne> specification)
+		{
+			return Task.FromResult(_context.Personnes
+			.Where(specification.IsSatisfiedBy)
+			.Count());
+		}
+
 
 		public Task<int> CreateAll(IEnumerable<Personne> newCurrentPersons)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<bool> Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
-			throw new NotImplementedException();
-		}
-
-		public Task<(IEnumerable<Personne> Results, int Total)> Find(int limit, int offset, params Specification<Personne>[] specifications)
-		{
-			throw new NotImplementedException();
+			try
+			{
+				var personne = await _context.Personnes.FirstOrDefaultAsync(personne =>
+			   personne.Id == id);
+				if (personne == null)
+					return true;
+				_context.Remove(personne);
+				await _context.SaveChangesAsync();
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
 		}
 
 		public Task<(IEnumerable<Personne> Results, int Total)> Find(int limit, int offset, Specification<Personne> specification)
 		{
-			throw new NotImplementedException();
+			var results = _context.Personnes
+			.Where(specification.IsSatisfiedBy)
+			.Skip(offset)
+			.Take(limit)
+			.Select(personne => personne.ToDomain());
+			return Task.FromResult((results, _context.Personnes.Count()));
 		}
 
 		public Task<IEnumerable<Personne>> FindAll(params Specification<Personne>[] specifications)
@@ -41,29 +74,25 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 			throw new NotImplementedException();
 		}
 
-		public Task<Personne> GetOne(int id)
+		public async Task<Personne> GetOne(int id)
 		{
-			throw new NotImplementedException();
+			var personne = await _context.Personnes.FirstAsync(personne => personne.Id == id);
+			return personne.ToDomain();
 		}
 
-		public Task<bool> HasAny(params Specification<Personne>[] specifications)
+		public Task<bool> HasAny(Specification<Personne> specifications)
 		{
-			throw new NotImplementedException();
+			return _context.Personnes.AnyAsync(personne => specifications.IsSatisfiedBy(personne));
 		}
 
-		public Task<int> RemoveAll(params Specification<Personne>[] specifications)
+		public async Task<int> Update(int id, Personne personne)
 		{
-			throw new NotImplementedException();
-		}
-
-		public Task<int> Update(int id, Personne T)
-		{
-			throw new NotImplementedException();
-		}
-
-		Task<int> Repository<Personne>.Create(Personne T)
-		{
-			throw new NotImplementedException();
+			var personneToUpdate = _context.Personnes.First(place => place.Id == id);
+			personneToUpdate.Nom = personne.Nom!.Value;
+			personneToUpdate.Prenom = personne.Prenom!.Value;
+			personneToUpdate.Statut = (int)personne.Statut;
+			await _context.SaveChangesAsync();
+			return id;
 		}
 	}
 }

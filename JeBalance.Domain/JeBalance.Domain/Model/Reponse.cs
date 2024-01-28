@@ -8,27 +8,33 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Domain.Model
 {
-    public class Reponse : Entity
+    public class Reponse
     {
         public DateTime Horodatage { get; }
         public Type Type { get; }
         public int? Retribution { get; }
-        public Reponse(DateTime horodatage, Type type, int? retribution) : base(0)
+        public Reponse(DateTime horodatage, Type type, int? retribution)
         {
             Horodatage = horodatage;
             Type = type;
             if (retribution != null) { Retribution = retribution; }
         }
 
-        public Reponse(DateTime horodatage, int id, Type type, int? retribution) : base(id)
-        {
-            Horodatage = horodatage;
-            Type = type;
-            if (retribution != null) { Retribution = retribution; }
-        }
-
-		public Reponse() : base(0)
+		public Reponse()
 		{
+		}
+
+		public override bool Equals(object? obj)
+		{
+			return obj is Reponse reponse &&
+				   Horodatage == reponse.Horodatage &&
+				   Type == reponse.Type &&
+				   Retribution == reponse.Retribution;
+		}
+
+		public override int GetHashCode()
+		{
+			return HashCode.Combine(Horodatage, Type, Retribution);
 		}
 	}
 }

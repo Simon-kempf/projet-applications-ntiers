@@ -16,24 +16,74 @@ namespace JeBalance.Infrastructure.SQLServer.Model
         {
             return new Denonciation(
                 denonciation.Horodatage,
-                new Personne(denonciation.Informateur!.Id, null, null),
-                new Personne(denonciation.Suspect!.Id, null, null),
+				denonciation.Id,
+                denonciation.Informateur.ToDomainPersonne(),
+				denonciation.Suspect.ToDomainPersonne(),
                 (Delit)denonciation.Delit,
-                denonciation.PaysEvasion!.Value
-            );
+                denonciation.PaysEvasion,
+				denonciation.Reponse.ToDomain()
+			);
         }
+
+		public static string ToSQLSPersonne(this Personne personne)
+		{
+			if (personne == null)
+				return "";
+			return personne.Id + ";" 
+				+ personne.Nom + ";" 
+				+ personne.Prenom + ";" 
+				+ personne.Statut + ";"
+				+ personne.Adresse.toSQLS();
+		}
+
+		public static Personne ToDomainPersonne(this string personne)
+		{
+			if (personne == "")
+				return null;
+			
+			string[] composantes = personne.Split(";");
+			Adresse adresse = new Adresse(int.Parse(composantes[4]), 
+				composantes[5],
+				composantes[6],
+				int.Parse(composantes[7]));
+
+			return new Personne(
+				int.Parse(composantes[0]),
+				composantes[1],
+				composantes[2],
+				(Statut)Enum.Parse(typeof(Statut), composantes[3]),
+				adresse);
+		}
+
+		public static string toSQLS(this Adresse adresse)
+		{
+			return adresse.toString();
+		}
+
+		public static Adresse toDomain(this string adresse)
+		{
+			string[] composantes = adresse.Split(";");
+			Adresse result = new Adresse(int.Parse(composantes[0]),
+				composantes[1],
+				composantes[2],
+				int.Parse(composantes[3]));
+			return result;
+		}
+
         public static DenonciationSQLS ToSQLS(this Denonciation denonciation)
         {
-            return new DenonciationSQLS
-            {
-                Id = denonciation.Id,
-                IdInformateur = denonciation.Informateur!.Id,
-                IdSuspect = denonciation.Suspect!.Id,
-                Delit = (int)denonciation.Delit!.Value,
-                StatutInfo = (int)denonciation.Informateur!.Statut,
-                StatutSuspect = (int)denonciation.Suspect!.Statut,
-                Horodatage = denonciation.Horodatage!.Value
-            };
+			return new DenonciationSQLS
+			{
+				Id = denonciation.Id,
+				Informateur = denonciation.Informateur!.ToSQLSPersonne(),
+				Suspect = denonciation.Suspect.ToSQLSPersonne(),
+				Delit = (int)denonciation.Delit!.Value,
+				StatutInfo = (int)denonciation.Informateur!.Statut,
+				StatutSuspect = (int)denonciation.Suspect!.Statut,
+				Horodatage = denonciation.Horodatage!.Value,
+				PaysEvasion = denonciation.PaysEvasion!.Value,
+				Reponse = denonciation.Reponse!.ToSQLS()
+			};
         }
 
 		public static Personne ToDomain(this PersonneSQLS personne)
@@ -42,7 +92,8 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			personne.Id,
 			personne.Nom,
 			personne.Prenom,
-            (Statut)personne.Statut);
+            (Statut)personne.Statut,
+			personne.Adresse.toDomain());
 		}
 		public static PersonneSQLS ToSQLS(this Personne personne)
 		{
@@ -51,29 +102,33 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 				Id = personne.Id,
 				Nom = personne.Nom!.Value,
 				Prenom = personne.Prenom!.Value,
-                Statut = (int)personne.Statut!
+                Statut = (int)personne.Statut!,
+				Adresse = personne.Adresse.toSQLS()
 			};
 		}
 
-		public static Reponse ToDomain(this ReponseSQLS reponse)
+		public static Reponse ToDomain(this String reponse)
 		{
+			if (reponse == "")
+				return null;
+			string[] composantes = reponse.Split(";");
+
 			return new Reponse(
-				reponse.Horodatage,
-				reponse.Id,
-				(Domain.Model.Type)reponse.Type,
-				reponse.Retribution);
-		}
-		public static ReponseSQLS ToSQLS(this Reponse reponse)
-		{
-			return new ReponseSQLS
-			{
-				Horodatage = reponse.Horodatage,
-				Id = reponse.Id,
-				Type = (int)reponse.Type,
-				Retribution = reponse.Retribution!.Value
-			};
+				DateTime.Parse(composantes[0]),
+				(Domain.Model.Type)Enum.Parse(typeof(Domain.Model.Type), composantes[2]),
+				int.Parse(composantes[1])
+			);
 		}
 
+
+		public static string ToSQLS(this Reponse reponse)
+		{
+			if (reponse == null)
+				return "";
+			return reponse.Horodatage + ";" + reponse.Retribution + ";" + reponse.Type;
+		}
+
+		/*
 		public static VIP ToDomain(this VIPSQLS vip)
 		{
 			return new VIP(
@@ -126,7 +181,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			{
 				return node == _from ? _to : base.Visit(node);
 			}
-		}
+		}*/
 
 	}
 }
