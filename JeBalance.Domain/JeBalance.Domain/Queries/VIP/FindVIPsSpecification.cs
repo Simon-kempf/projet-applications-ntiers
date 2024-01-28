@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace JeBalance.Domain.Queries.VIP
 {
-	public class FindVIPsSpecification : Specification<Model.Utilisateurs.VIP>
+	public class FindVIPsSpecification : Specification<Personne>
 	{
 		private readonly string? _nameSearch;
 		private readonly string? _surnameSearch;
@@ -15,7 +15,7 @@ namespace JeBalance.Domain.Queries.VIP
 			_surnameSearch = surnameSearch?.Trim()?.ToLower();
 		}
 
-		public override Expression<Func<Model.Utilisateurs.VIP, bool>> ToExpression()
+		public override Expression<Func<Personne, bool>> ToExpression()
 		{
 			return _nameSearch == null
 				? vip => vip.Prenom!.Value == _surnameSearch
@@ -23,6 +23,6 @@ namespace JeBalance.Domain.Queries.VIP
 					? vip => vip.Nom!.Value == _nameSearch
 					: vip => vip.Nom!.Value == _nameSearch && vip.Prenom!.Value == _surnameSearch
 				);
-				}
+		}
 	}
 }

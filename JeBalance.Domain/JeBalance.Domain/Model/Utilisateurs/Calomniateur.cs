@@ -2,7 +2,7 @@
 
 namespace JeBalance.Domain.Model.Utilisateurs
 {
-    public class Calomniateur : IPersonne
+    public class Calomniateur : Personne
     {
         public Calomniateur(string nom, string prenom) : base(0)
         {

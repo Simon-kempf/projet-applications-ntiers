@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Infrastructure.SQLServer.Model
 {
-    public class ReponseSQLS
+    public class ReponseSQLS : Reponse
     {
-        [Column("id")]
-        public int Id { get; set; }
+        
         [Column("horodatage")]
-        public DateTime Horodatage { get; set; }
+        public new DateTime Horodatage { get; set; }
         [Column("type")]
-        public int Type { get; set; }
+        public new int Type { get; set; }
         [Column("retribution")]
-        public int Retribution { get; set; }
+        public new int Retribution { get; set; }
     }
 }

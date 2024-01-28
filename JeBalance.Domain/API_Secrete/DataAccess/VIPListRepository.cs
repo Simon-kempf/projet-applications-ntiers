@@ -15,17 +15,17 @@ namespace API_Secrete.DataAccess
             Ajouter(new VIP(2, "Claude", "François"));
         }
 
-        public IPersonne? Rechercher(int id)
+        public Personne? Rechercher(int id)
         {
             return _donnees.RechercherVIP(id);
         }
 
-        public IReadOnlyCollection<IPersonne> Lister()
+        public IReadOnlyCollection<Personne> Lister()
         {
             return _donnees.Vips;
         }
 
-        public void Ajouter(IPersonne person)
+        public void Ajouter(Personne person)
         {
             _donnees.AjouterVIP(person);
         }

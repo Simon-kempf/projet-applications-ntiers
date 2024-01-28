@@ -15,7 +15,7 @@ public class FindPersonnesSpecification : Specification<Personne>
     {
         _nameSearch = nom?.Trim()?.ToLower();
         _surnameSearch = prenom?.Trim()?.ToLower();
-        _id = id ?? 1;
+        _id = id ?? 0;
         _statut = statut ?? Statut.NONE;
     }
 

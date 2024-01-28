@@ -11,9 +11,9 @@ using System.Xml.Linq;
 
 namespace JeBalance.Infrastructure.SQLServer.Configurations
 {
-    internal class VIPConfiguration : IEntityTypeConfiguration<VIPSQLS>
+    internal class VIPConfiguration : IEntityTypeConfiguration<PersonneSQLS>
     {
-        public void Configure(EntityTypeBuilder<VIPSQLS> builder)
+        public void Configure(EntityTypeBuilder<PersonneSQLS> builder)
         {
             builder
  .ToTable("VIP", DatabaseContext.DEFAULT_SCHEMA)
