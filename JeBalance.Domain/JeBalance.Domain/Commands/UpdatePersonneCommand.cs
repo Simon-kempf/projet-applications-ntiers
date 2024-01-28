@@ -13,10 +13,10 @@ namespace JeBalance.Domain.Commands
 		public int Id { get; }
 		public Personne Personne { get; }
 
-		public UpdatePersonneCommand(int id, string nom, string prenom, Statut statut)
+		public UpdatePersonneCommand(int id, string nom, string prenom, Statut statut, Adresse adresse)
 		{
 			Id = id;
-			Personne = new Personne(nom, prenom, statut);
+			Personne = new Personne(nom, prenom, statut, adresse);
 		}
 	}
 }

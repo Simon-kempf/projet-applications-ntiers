@@ -8,6 +8,7 @@ namespace API.Resources
 		public string Prenom { get; set; }
 
 		public Statut Statut { get; set; }
+		public Adresse Adresse { get; set; }
 
 		public PersonneAPI()
 		{

@@ -51,7 +51,7 @@ namespace API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] PersonneAPI resource)
 		{
-			var command = new CreatePersonneCommand(resource.Nom, resource.Prenom, resource.Statut);
+			var command = new CreatePersonneCommand(resource.Nom, resource.Prenom, resource.Statut, resource.Adresse);
 			var id = await _mediator.Send(command);
 			return Ok(id);
 		}
@@ -60,7 +60,7 @@ namespace API.Controllers
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Put(int id, [FromBody] PersonneAPI resource)
 		{
-			var command = new UpdatePersonneCommand(id, resource.Nom, resource.Prenom, resource.Statut);
+			var command = new UpdatePersonneCommand(id, resource.Nom, resource.Prenom, resource.Statut, resource.Adresse);
 			await _mediator.Send(command);
 			return Ok(id);
 		}

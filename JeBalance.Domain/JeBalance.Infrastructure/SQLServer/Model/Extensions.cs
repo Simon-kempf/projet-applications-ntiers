@@ -29,21 +29,45 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 		{
 			if (personne == null)
 				return "";
-			return personne.Id + ";" + personne.Nom + ";" + personne.Prenom + ";" + personne.Statut;
+			return personne.Id + ";" 
+				+ personne.Nom + ";" 
+				+ personne.Prenom + ";" 
+				+ personne.Statut + ";"
+				+ personne.Adresse.toSQLS();
 		}
 
 		public static Personne ToDomainPersonne(this string personne)
 		{
 			if (personne == "")
 				return null;
+			
 			string[] composantes = personne.Split(";");
+			Adresse adresse = new Adresse(int.Parse(composantes[4]), 
+				composantes[5],
+				composantes[6],
+				int.Parse(composantes[7]));
 
 			return new Personne(
 				int.Parse(composantes[0]),
 				composantes[1],
 				composantes[2],
-				(Statut)Enum.Parse(typeof(Statut), composantes[3])
-			);
+				(Statut)Enum.Parse(typeof(Statut), composantes[3]),
+				adresse);
+		}
+
+		public static string toSQLS(this Adresse adresse)
+		{
+			return adresse.toString();
+		}
+
+		public static Adresse toDomain(this string adresse)
+		{
+			string[] composantes = adresse.Split(";");
+			Adresse result = new Adresse(int.Parse(composantes[0]),
+				composantes[1],
+				composantes[2],
+				int.Parse(composantes[3]));
+			return result;
 		}
 
         public static DenonciationSQLS ToSQLS(this Denonciation denonciation)
@@ -68,7 +92,8 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			personne.Id,
 			personne.Nom,
 			personne.Prenom,
-            (Statut)personne.Statut);
+            (Statut)personne.Statut,
+			personne.Adresse.toDomain());
 		}
 		public static PersonneSQLS ToSQLS(this Personne personne)
 		{
@@ -77,7 +102,8 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 				Id = personne.Id,
 				Nom = personne.Nom!.Value,
 				Prenom = personne.Prenom!.Value,
-                Statut = (int)personne.Statut!
+                Statut = (int)personne.Statut!,
+				Adresse = personne.Adresse.toSQLS()
 			};
 		}
 
@@ -119,7 +145,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 				Prenom = vip.Prenom!.Value,
 				Statut = 4
 			};
-		}*/
+		}
 
 		public static IQueryable<T> Apply<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
 		{
@@ -155,7 +181,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			{
 				return node == _from ? _to : base.Visit(node);
 			}
-		}
+		}*/
 
 	}
 }

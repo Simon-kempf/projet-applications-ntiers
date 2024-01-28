@@ -25,5 +25,8 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 		[Column("statut")]
 		public int Statut { get; set; }
 
+		[Column("adresse")]
+		public string Adresse { get; set; }
+
 	}
 }

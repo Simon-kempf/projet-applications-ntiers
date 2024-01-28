@@ -12,6 +12,6 @@ namespace JeBalance.Domain.Commands
 	{
 		public Personne Personne { get; }
 
-		public CreatePersonneCommand(string nom, string prenom, Statut statut) => Personne = new Personne(nom, prenom, statut);
+		public CreatePersonneCommand(string nom, string prenom, Statut statut, Adresse adresse) => Personne = new Personne(nom, prenom, statut, adresse);
 	}
 }
