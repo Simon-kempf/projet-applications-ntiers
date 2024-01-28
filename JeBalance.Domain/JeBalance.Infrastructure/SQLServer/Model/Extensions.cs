@@ -30,9 +30,9 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			if (personne == null)
 				return "";
 			return personne.Id + ";" 
-				+ personne.Nom + ";" 
-				+ personne.Prenom + ";" 
-				+ personne.Statut + ";"
+				+ personne.Nom!.Value + ";" 
+				+ personne.Prenom!.Value + ";" 
+				+ personne.Statut.ToString() + ";"
 				+ personne.Adresse.toSQLS();
 		}
 
@@ -76,7 +76,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			{
 				Id = denonciation.Id,
 				Informateur = denonciation.Informateur!.ToSQLSPersonne(),
-				Suspect = denonciation.Suspect.ToSQLSPersonne(),
+				Suspect = denonciation.Suspect!.ToSQLSPersonne(),
 				Delit = (int)denonciation.Delit!.Value,
 				StatutInfo = (int)denonciation.Informateur!.Statut,
 				StatutSuspect = (int)denonciation.Suspect!.Statut,
@@ -110,14 +110,20 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 		public static Reponse ToDomain(this String reponse)
 		{
 			if (reponse == "")
-				return null;
+				return new Reponse();
 			string[] composantes = reponse.Split(";");
 
-			return new Reponse(
-				DateTime.Parse(composantes[0]),
-				(Domain.Model.Type)Enum.Parse(typeof(Domain.Model.Type), composantes[2]),
-				int.Parse(composantes[1])
-			);
+			DateTime date = (composantes[0] == null) 
+				? new DateTime() 
+				: DateTime.Parse(composantes[0]);
+			Domain.Model.Type type = (composantes[2] == null) 
+					? 0 
+					: (Domain.Model.Type)Enum.Parse(typeof(Domain.Model.Type), composantes[2]);
+			int retribution = (composantes[1] == null)
+					? 0
+					: 0;//TODO
+
+			return new Reponse(date, type, retribution);
 		}
 
 
@@ -125,7 +131,7 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 		{
 			if (reponse == null)
 				return "";
-			return reponse.Horodatage + ";" + reponse.Retribution + ";" + reponse.Type;
+			return (reponse.Horodatage).ToString() + ";" + reponse.Retribution + ";" + ((int)reponse.Type).ToString();
 		}
 
 		/*

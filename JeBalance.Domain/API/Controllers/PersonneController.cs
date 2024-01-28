@@ -1,11 +1,10 @@
 ﻿using API.Parameters;
 using API.Resources;
-using JeBalance.Domain.Model;
 using JeBalance.Domain.Queries;
-using JeBalance.Domain.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using JeBalance.Domain.Commands.PersonneCommands;
 
 namespace API.Controllers
 {
@@ -43,8 +42,8 @@ namespace API.Controllers
 		public async Task<IActionResult> Get(int id)
 		{
 			var query = new GetOnePersonneQuery(id);
-			var place = await _mediator.Send(query);
-			return Ok(place);
+			var personne = await _mediator.Send(query);
+			return Ok(personne);
 		}
 
 

@@ -54,13 +54,14 @@ public class DenonciationRepositorySQLS : IDenonciationRepository
         return Task.FromResult((results, results.Count()));
     }
 
-	public Task<Denonciation> GetOne(int id)
+	public Task<int> Update(int id, Denonciation T)
 	{
 		throw new NotImplementedException();
 	}
 
-	public Task<int> Update(int id, Denonciation T)
+	public async Task<Denonciation> GetOne(int id)
 	{
-		throw new NotImplementedException();
+		var denonciation = await _context.Denonciations.FirstAsync(denonciation => denonciation.Id == id);
+		return denonciation.ToDomain();
 	}
 }

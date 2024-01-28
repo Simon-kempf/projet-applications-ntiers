@@ -10,7 +10,11 @@ public class CodePostal : SimpleValueObject<int>
     {
     }
 
-    public override int Validate(int value) { 
+	public CodePostal() : base(1)
+	{
+	}
+
+	public override int Validate(int value) { 
 
         if (value < MIN) throw new ApplicationException($"Le code postal ne peux pas être inférieur à {MIN}");
 
