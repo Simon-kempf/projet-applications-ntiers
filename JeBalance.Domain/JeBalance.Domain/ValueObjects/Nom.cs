@@ -7,7 +7,7 @@ public class Nom : SimpleValueObject<string>
     public const int MIN_LENGTH = 2;
     public const int MAX_LENGTH = 50;
 
-	public Nom() : base("")
+	public Nom() : base("Non renseigné")
 	{
 	}
 

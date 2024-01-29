@@ -40,5 +40,18 @@ namespace JeBalance.Domain.Model
 
             if (pays != null) { PaysEvasion = new PaysEvasion(pays); }
         }
+
+		public Denonciation(DateTime horodatage, Personne informateur, Personne suspect, Delit delit, string? pays, Reponse reponse) : base(0)
+		{
+			Horodatage = horodatage;
+			Informateur = informateur;
+			informateur.Statut = Statut.INFORMATEUR;
+			Suspect = suspect;
+			suspect.Statut = Statut.SUSPECT;
+			Delit = delit;
+			Reponse = reponse;
+
+			if (pays != null) { PaysEvasion = new PaysEvasion(pays); }
+		}
 	}
 }

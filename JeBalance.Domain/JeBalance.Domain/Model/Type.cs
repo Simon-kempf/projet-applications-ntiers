@@ -8,7 +8,8 @@ namespace JeBalance.Domain.Model
 {
     public enum Type
     {
-        REJET = 0,
-        CONFIRMATION = 1
+        NONE = 0,
+        REJET = 1,
+        CONFIRMATION = 2
     }
 }
