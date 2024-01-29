@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Secrete", "API_Secrete\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JeBalance.Infrastructure", "JeBalance.Infrastructure\JeBalance.Infrastructure.csproj", "{26D15CBD-185E-426A-B451-7A57222767A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeBalance.UI", "JeBalance.UI\JeBalance.UI.csproj", "{4702CA5F-D483-4212-A2FF-9ECF7178E32E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JeBalance.UI", "JeBalance.UI\JeBalance.UI.csproj", "{4702CA5F-D483-4212-A2FF-9ECF7178E32E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

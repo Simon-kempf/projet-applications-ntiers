@@ -6,7 +6,9 @@ namespace JeBalance.UI.Authentication
 {
     public class UserSession
     {
-        [JsonPropertyName("nom")]
+		[JsonPropertyName("pseudo")]
+		public string Pseudo { get; set; }
+		[JsonPropertyName("nom")]
         public string Nom { get; set; }
         [JsonPropertyName("prenom")]
         public string Prenom { get; set; }
@@ -18,7 +20,8 @@ namespace JeBalance.UI.Authentication
         {
             return new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>
             {
-                new Claim(ClaimTypes.Name, Nom + " " + Prenom),
+				new Claim(ClaimTypes.NameIdentifier, Pseudo),
+				new Claim(ClaimTypes.Name, Nom + " " + Prenom),
                 new Claim(ClaimTypes.StreetAddress, Adresse)
             }, authenticationType));
         }
