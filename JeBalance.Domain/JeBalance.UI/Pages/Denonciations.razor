@@ -1,4 +1,4 @@
-﻿@page "/denonciations"
+﻿@page "/denonciations/"
 @using JeBalance.Domain.Model
 @inject DenonciationsService Service
 <PageTitle>@Title</PageTitle>
@@ -46,11 +46,11 @@ else
 			@foreach (var denonciation in denonciations)
 			{
 				<tr>
-					<td>@denonciation.Horodatage.ToString()</td>
-					<td>@denonciation.Informateur!.Nom!.Value @denonciation.Informateur!.Prenom!.Value</td>
-					<td>@denonciation.Suspect!.Nom!.Value @denonciation.Suspect!.Prenom!.Value</td>
-					<td>@denonciation.Delit!.Value.ToString()</td>
-					<td>@denonciation.PaysEvasion!.Value</td>
+					<td>@denonciation.Horodatage</td>
+					<td>@denonciation.Informateur!.Nom @denonciation.Informateur!.Prenom</td>
+					<td>@denonciation.Suspect!.Nom @denonciation.Suspect!.Prenom</td>
+					<td>@denonciation.Delit</td>
+					<td>@denonciation.PaysEvasion</td>
 				</tr>
 			}
 		</tbody>
