@@ -1,6 +1,5 @@
 ﻿using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Model.Utilisateurs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

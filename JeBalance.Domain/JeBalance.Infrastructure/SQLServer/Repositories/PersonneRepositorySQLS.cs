@@ -91,6 +91,10 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 			personneToUpdate.Nom = personne.Nom!.Value;
 			personneToUpdate.Prenom = personne.Prenom!.Value;
 			personneToUpdate.Statut = (int)personne.Statut;
+			personneToUpdate.Adresse = personne.Adresse.toSQLS();
+			personneToUpdate.estVIP = personne.estVIP ? 1 : 0;
+			personneToUpdate.estCalomniateur = personne.estCalomniateur ? 1 : 0;
+			personneToUpdate.Role = (int)personne.Role;
 			await _context.SaveChangesAsync();
 			return id;
 		}

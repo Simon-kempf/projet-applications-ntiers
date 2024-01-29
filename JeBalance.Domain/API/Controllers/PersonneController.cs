@@ -48,18 +48,18 @@ namespace API.Controllers
 
 
 		[HttpPost]
-		public async Task<IActionResult> Post([FromBody] PersonneAPI resource)
+		public async Task<IActionResult> Post([FromBody] PersonneAPICreation resource)
 		{
-			var command = new CreatePersonneCommand(resource.Nom, resource.Prenom, resource.Statut, resource.Adresse);
+			var command = new CreatePersonneCommand(resource.Nom, resource.Prenom, resource.Statut, resource.CodePostal, resource.NomDeCommune, resource.NomDeVoie, resource.NumeroDeVoie);
 			var id = await _mediator.Send(command);
 			return Ok(id);
 		}
 
 		
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Put(int id, [FromBody] PersonneAPI resource)
+		public async Task<IActionResult> Put(int id, [FromBody] PersonneAPIUpdate resource)
 		{
-			var command = new UpdatePersonneCommand(id, resource.Nom, resource.Prenom, resource.Statut, resource.Adresse);
+			var command = new UpdatePersonneCommand(id, resource.Nom, resource.Prenom, resource.Statut, resource.estVIP, resource.estCalomniateur, resource.Role, resource.CodePostal, resource.NomDeCommune, resource.NomDeVoie, resource.NumeroDeVoie);
 			await _mediator.Send(command);
 			return Ok(id);
 		}
