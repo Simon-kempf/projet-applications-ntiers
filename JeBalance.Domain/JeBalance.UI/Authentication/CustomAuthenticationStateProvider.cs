@@ -38,11 +38,8 @@ namespace JeBalance.UI.Authentication
         {
             try
             {
-                var userSSR = await _sessionStorage.GetAsync<UserSession>
-                (SessionKey);
-                var userSession = userSSR.Success
-                ? userSSR.Value
-                : null;
+                var userSSR = await _sessionStorage.GetAsync<UserSession> (SessionKey);
+                var userSession = userSSR.Success ? userSSR.Value : null;
                 if (userSession == null)
                 {
                     return null;

@@ -23,7 +23,7 @@ namespace JeBalance.UI.Authentication
         }
         private HttpRequestMessage MakeRequest(string username, string password)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7001/api/Authenticate/login");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7029/api/Authenticate/login");
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("User-Agent", "JeBalance");
             var httpContent = new StringContent(JsonSerializer.Serialize(new { username, password }), Encoding.UTF8, "application/json");
