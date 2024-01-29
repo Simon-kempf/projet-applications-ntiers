@@ -10,7 +10,11 @@ public class NumeroDeVoie : SimpleValueObject<int>
     {
     }
 
-    public override int Validate(int value)
+	public NumeroDeVoie() : base(1)
+	{
+	}
+
+	public override int Validate(int value)
     {
 
         if (value < MIN) throw new ApplicationException($"Le numéro de voie ne peux pas être inférieur à {MIN}");
