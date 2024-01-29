@@ -1,18 +1,10 @@
-﻿@page "/denonciations/"
+﻿@page "/denonciation/{denonciationId:int}"
 @using JeBalance.Domain.Model
-@inject DenonciationsService Service
+@inject DenonciationService Service
 <PageTitle>@Title</PageTitle>
-	@if (denonciations == null)
+	@if (denonciation == null)
 {
 	<p><em>Chargement...</em></p>
-}
-else if (denonciations.Count() == 0)
-{
-	<h3>Il n'y a aucune dénonciation</h3>
-	<button @onclick="@(() => Add())" class="btn btn-sm btn-primary">
-		<span class="oi oi-plus"></span>
-		Ajouter
-	</button>
 }
 else
 {
@@ -43,23 +35,21 @@ else
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var denonciation in denonciations)
-			{
-				<tr>
-					<td>@denonciation.Horodatage</td>
-					<td>@denonciation.Informateur!.Nom @denonciation.Informateur!.Prenom</td>
-					<td>@denonciation.Suspect!.Nom @denonciation.Suspect!.Prenom</td>
-					<td>@denonciation.Delit</td>
-					<td>@denonciation.PaysEvasion</td>
-				</tr>
-			}
+			<tr>
+				<td>@denonciation.Horodatage</td>
+				<td>@denonciation.Informateur!.Nom @denonciation.Informateur!.Prenom</td>
+				<td>@denonciation.Suspect!.Nom @denonciation.Suspect!.Prenom</td>
+				<td>@denonciation.Delit</td>
+				<td>@denonciation.PaysEvasion</td>
+			</tr>
 		</tbody>
 	</table>
 }
 
 @code {
-	private const string Title = "Liste des dénonciations";
-	private Denonciation[]? denonciations;
+	[Parameter] public int denonciationId { get; set; }
+	private const string Title = "Dénonciation";
+	private JeBalance.Domain.Model.Denonciation? denonciation;
 	[CascadingParameter]
 	public IModalService Modal { get; set; } = default!;
 	protected override async Task OnInitializedAsync()
@@ -68,7 +58,7 @@ else
 	}
 	private async Task FetchData()
 	{
-		denonciations = await Service.GetDenonciationsAsync();
+		denonciation = await Service.GetDenonciationAsync(denonciationId);
 	}
 	async Task Add()
 	{

@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Denonciations.razor" />
+    <None Include="Pages\Denonciation.razor" />
   </ItemGroup>
 
   <ItemGroup>

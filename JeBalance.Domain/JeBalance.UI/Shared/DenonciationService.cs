@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace JeBalance.UI.Shared
 {
-	public class DenonciationsService : ServiceBase<Denonciation>
+	public class DenonciationService : ServiceBase<Denonciation>
 	{
-		private const string Controller = "denonciations";
-		public DenonciationsService(IHttpClientFactory clientFactory, AuthenticationStateProvider authStateProvider)
+		private const string Controller = "Denonciation";
+		public DenonciationService(IHttpClientFactory clientFactory, AuthenticationStateProvider authStateProvider)
 		: base(clientFactory, (CustomAuthenticationStateProvider)authStateProvider, Controller)
 		{
 		}
