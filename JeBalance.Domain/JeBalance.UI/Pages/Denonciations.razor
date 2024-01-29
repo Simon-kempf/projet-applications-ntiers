@@ -1,0 +1,82 @@
+﻿@page "/denonciations"
+@using JeBalance.Domain.Model
+@inject DenonciationsService Service
+<PageTitle>@Title</PageTitle>
+	@if (denonciations == null)
+{
+	<p><em>Chargement...</em></p>
+}
+else if (denonciations.Count() == 0)
+{
+	<h3>Il n'y a aucune dénonciation</h3>
+	<button @onclick="@(() => Add())" class="btn btn-sm btn-primary">
+		<span class="oi oi-plus"></span>
+		Ajouter
+	</button>
+}
+else
+{
+	<div class="row">
+		<div class="col-12">
+			<h4><span class="oi oi-list"></span> @Title</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<div class="col-6">
+				<button @onclick="@(() => Add())" class="btn btn-sm btnprimary">
+					<span class="oi oi-plus"></span>
+					Ajouter
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Horodatage</th>
+				<th>Informateur</th>
+				<th>Suspect</th>
+				<th>Délit</th>
+				<th>Pays d'évasion</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var denonciation in denonciations)
+			{
+				<tr>
+					<td>@denonciation.Horodatage.ToString()</td>
+					<td>@denonciation.Informateur!.Nom!.Value @denonciation.Informateur!.Prenom!.Value</td>
+					<td>@denonciation.Suspect!.Nom!.Value @denonciation.Suspect!.Prenom!.Value</td>
+					<td>@denonciation.Delit!.Value.ToString()</td>
+					<td>@denonciation.PaysEvasion!.Value</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	private const string Title = "Liste des dénonciations";
+	private Denonciation[]? denonciations;
+	[CascadingParameter]
+	public IModalService Modal { get; set; } = default!;
+	protected override async Task OnInitializedAsync()
+	{
+		await FetchData();
+	}
+	private async Task FetchData()
+	{
+		denonciations = await Service.GetDenonciationsAsync();
+	}
+	async Task Add()
+	{
+		var modal = Modal.Show<AddDenonciation>("Ajout d'une dénonciation");
+		var result = await modal.Result;
+		if (!result.Cancelled)
+		{
+			await FetchData();
+		}
+	}
+}

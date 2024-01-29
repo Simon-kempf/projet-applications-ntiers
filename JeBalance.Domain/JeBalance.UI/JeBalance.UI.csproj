@@ -7,7 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Shared\Denonciations.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Shared\Denonciations.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Shared\Denonciations.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Denonciations.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JeBalance.Domain\JeBalance.Domain.csproj" />
   </ItemGroup>
 
 </Project>

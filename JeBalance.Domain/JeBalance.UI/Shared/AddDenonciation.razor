@@ -1,0 +1,27 @@
+﻿@page "/addDenonciation"
+@using JeBalance.Domain.Model
+@inject DenonciationsService Service
+<EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
+
+
+
+		<button type="submit" class="btn btn-primary">Sauvegarder</button>
+		<button @onclick="@(async () => await BlazoredModal.CancelAsync())"
+				class="btn btn-secondary">
+			Annuler
+		</button>
+	</EditForm>
+	@code {
+	[CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+	[Parameter] public int Id { get; set; }
+	Denonciation denonciation = new Denonciation();
+	protected override async Task OnInitializedAsync()
+	{
+		denonciation = await Service.GetDenonciationAsync(Id);
+	}
+	private async void FormSubmitted()
+	{
+		await Service.AddDenonciationAsync(denonciation);
+		await BlazoredModal.CloseAsync(ModalResult.Ok<Denonciation>(denonciation));
+	}
+}
