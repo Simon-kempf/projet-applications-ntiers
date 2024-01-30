@@ -1,4 +1,5 @@
 ﻿using JeBalance.Domain.Model;
+using JeBalance.Domain.ValueObjects;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,10 @@ namespace JeBalance.Domain.Commands.PersonneCommands
     {
         public Personne Personne { get; }
 
-        public CreatePersonneCommand(string nom, string prenom, Statut statut, Adresse adresse) => Personne = new Personne(nom, prenom, statut, adresse);
+        public CreatePersonneCommand(string nom, string prenom, Statut statut, int codePostal, string nomDeCommune, string nomDeVoie, int numeroDeVoie)
+		{
+			Adresse adresse = new Adresse(codePostal, nomDeCommune, nomDeVoie, numeroDeVoie);
+			Personne = new Personne(nom, prenom, statut, adresse);
+		}
     }
 }

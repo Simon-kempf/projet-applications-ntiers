@@ -5,13 +5,22 @@ namespace JeBalance.Domain.Commands.DenonciationCommands
 {
     public class CreatePersonneCommandHandler : IRequestHandler<CreateDenonciationCommand, int>
     {
-        private readonly IDenonciationRepository _repository;
+        private readonly IDenonciationRepository _denonciationRepository;
+		private readonly IPersonneRepository _personneRepository;
 
-        public CreatePersonneCommandHandler(IDenonciationRepository repository) => _repository = repository;
-
-        public Task<int> Handle(CreateDenonciationCommand command, CancellationToken cancellationToken)
+		public CreatePersonneCommandHandler(IDenonciationRepository denonciationRepository, IPersonneRepository personneRepository)
         {
-            return _repository.Create(command.Denonciation);
+			_denonciationRepository = denonciationRepository;
+            _personneRepository = personneRepository;
+		}
+
+        public async Task<int> Handle(CreateDenonciationCommand command, CancellationToken cancellationToken)
+        {
+            int idInformateur = await _personneRepository.Create(command.Denonciation.Informateur!);
+            int idSuspect = await _personneRepository.Create(command.Denonciation.Suspect!);
+            command.Denonciation.Informateur!.Id = idInformateur;
+			command.Denonciation.Suspect!.Id = idSuspect;
+			return await _denonciationRepository.Create(command.Denonciation);
         }
     }
 }

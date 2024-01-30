@@ -1,4 +1,5 @@
-﻿using JeBalance.Domain.ValueObjects;
+﻿using JeBalance.Domain.Model;
+using JeBalance.Domain.ValueObjects;
 using JeBalance.Infrastructure.SQLServer.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -22,7 +23,15 @@ namespace JeBalance.Infrastructure.SQLServer.Configurations
 				.IsRequired().HasMaxLength(Nom.MAX_LENGTH);
 			builder.Property(personne => personne.Prenom)
 				.IsRequired().HasMaxLength(Prenom.MAX_LENGTH);
+			builder.Property(personne => personne.Adresse)
+				.IsRequired().HasMaxLength(Adresse.MAX_LENGTH);
 			builder.Property(personne => personne.Statut)
+				.IsRequired().HasColumnType("int");
+			builder.Property(personne => personne.estVIP)
+				.IsRequired().HasColumnType("int");
+			builder.Property(personne => personne.estCalomniateur)
+				.IsRequired().HasColumnType("int");
+			builder.Property(personne => personne.Role)
 				.IsRequired().HasColumnType("int");
 		}
 	}
