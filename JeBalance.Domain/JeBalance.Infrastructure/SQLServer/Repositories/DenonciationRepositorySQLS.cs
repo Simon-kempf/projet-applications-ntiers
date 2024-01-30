@@ -43,21 +43,12 @@ public class DenonciationRepositorySQLS : IDenonciationRepository
             return false;
         }
     }
-    public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset, Specification<Denonciation> specification)
-    {
-        var dbSet = _context.Denonciations
-        .Where(specification.IsSatisfiedBy)
-        .Skip(offset)
-        .Take(limit)
-        .Select(denonciation => denonciation);
-        IEnumerable<Denonciation> results = dbSet.ToList();
-        return Task.FromResult((results, results.Count()));
-    }
 
 	public async Task<int> Update(int id, Reponse reponse)
 	{
 		var denonciationToUpdate = _context.Denonciations.First(place => place.Id == id);
 		denonciationToUpdate.Reponse = reponse.ToSQLS();
+        denonciationToUpdate.EstTraitee = true;
 		await _context.SaveChangesAsync();
 		return id;
 	}
@@ -68,8 +59,15 @@ public class DenonciationRepositorySQLS : IDenonciationRepository
 		return denonciation.ToDomain();
 	}
 
-	Task<int> Repository<Denonciation>.Update(int id, Denonciation T)
+	public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset, Specification<Denonciation> specification)
 	{
-		throw new NotImplementedException();
+		var results = _context.Denonciations
+			.Apply(specification.ToSQLSExpression<Denonciation, DenonciationSQLS>())
+            .Skip(offset)
+            .Take(limit)
+            .AsEnumerable()
+			.Select(denonciation => denonciation.ToDomain());
+
+		return Task.FromResult((results, _context.Denonciations.Count()));
 	}
 }

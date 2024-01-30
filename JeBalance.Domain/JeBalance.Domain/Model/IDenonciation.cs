@@ -19,5 +19,6 @@ namespace JeBalance.Domain.Model
         public Delit? Delit { get; set; }
         public PaysEvasion? PaysEvasion { get; set; }
         public Reponse? Reponse { get; set; }
+        public bool EstTraitee { get; set; } = false;
     }
 }

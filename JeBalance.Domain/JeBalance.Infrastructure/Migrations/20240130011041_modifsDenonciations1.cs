@@ -4,7 +4,7 @@
 
 namespace JeBalance.Infrastructure.Migrations
 {
-    public partial class personneAdresse1 : Migration
+    public partial class modifsDenonciations1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

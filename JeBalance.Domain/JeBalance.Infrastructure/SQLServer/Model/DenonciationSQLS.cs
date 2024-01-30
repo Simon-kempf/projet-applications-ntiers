@@ -32,18 +32,21 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 
 
 		[Column("paysEvasion")]
-		public new string PaysEvasion { get; set; }
+		public new string? PaysEvasion { get; set; }
 
 
 		[Column("informateur")]
-		public string Informateur { get; set; }
+		public new string? Informateur { get; set; }
 
 
 		[Column("suspect")]
-		public string Suspect { get; set; }
+		public new string? Suspect { get; set; }
 
 
 		[Column("reponse")]
-		public string Reponse { get; set; }
+		public new string? Reponse { get; set; }
+
+		[Column("estTraitee")]
+		public new bool EstTraitee { get; set; }
 	}
 }

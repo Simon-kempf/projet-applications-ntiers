@@ -33,6 +33,14 @@ namespace API.Controllers
 			return Ok(denonciation);
 		}
 
+		[HttpGet("non-traitees")]
+		public async Task<IActionResult> GetNonTraitees([FromQuery] FindNonTraiteesParameter parameter)
+		{
+			var query = new FindDenonciationsNonTraiteesQuery(parameter.Limit, parameter.Offset);
+			var denonciation = await _mediator.Send(query);
+			return Ok(denonciation);
+		}
+
 
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] DenonciationCreationAPI resource)

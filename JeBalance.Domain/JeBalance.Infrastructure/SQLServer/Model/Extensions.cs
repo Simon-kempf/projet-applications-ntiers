@@ -16,11 +16,12 @@ namespace JeBalance.Infrastructure.SQLServer.Model
             return new Denonciation(
                 denonciation.Horodatage,
 				denonciation.Id,
-                denonciation.Informateur.ToDomainPersonne(),
-				denonciation.Suspect.ToDomainPersonne(),
+                denonciation.Informateur!.ToDomainPersonne(),
+				denonciation.Suspect!.ToDomainPersonne(),
                 (Delit)denonciation.Delit,
                 denonciation.PaysEvasion,
-				denonciation.Reponse.ToDomain()
+				denonciation.Reponse!.ToDomain(),
+				denonciation.EstTraitee
 			);
         }
 
@@ -36,7 +37,8 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 				StatutSuspect = (int)denonciation.Suspect!.Statut,
 				Horodatage = denonciation.Horodatage!.Value,
 				PaysEvasion = denonciation.PaysEvasion!.Value,
-				Reponse = denonciation.Reponse!.ToSQLS()
+				Reponse = denonciation.Reponse!.ToSQLS(),
+				EstTraitee = denonciation.EstTraitee
 			};
 		}
 
