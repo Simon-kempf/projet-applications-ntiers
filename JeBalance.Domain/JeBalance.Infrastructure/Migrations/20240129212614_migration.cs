@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JeBalance.Infrastructure.Migrations
 {
-    public partial class t0 : Migration
+    public partial class migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,8 @@ namespace JeBalance.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     prenom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    statut = table.Column<int>(type: "int", nullable: false)
+                    statut = table.Column<int>(type: "int", nullable: false),
+                    adresse = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
