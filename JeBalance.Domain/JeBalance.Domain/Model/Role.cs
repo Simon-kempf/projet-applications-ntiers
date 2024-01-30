@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace JeBalance.Domain.Model
 {
-    public enum Statut
-    {
-        NONE = 0,
-        INFORMATEUR = 1,
-        SUSPECT = 2
-    }
+	public enum Role
+	{
+		NONE = 0,
+		ADMINISTRATEUR = 1,
+		FISC = 2
+	}
 }

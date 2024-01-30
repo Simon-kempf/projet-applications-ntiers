@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using JeBalance.Domain.Model.Utilisateurs;
 using JeBalance.Domain.Model;
 using API.Business;
 using API.Controllers.Dto;
