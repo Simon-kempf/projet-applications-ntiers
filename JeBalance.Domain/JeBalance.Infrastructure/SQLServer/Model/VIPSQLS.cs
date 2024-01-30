@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using JeBalance.Infrastructure.SQLServer.Model;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.ValueObjects;
-using JeBalance.Domain.Model.Utilisateurs;
 
 namespace JeBalance.Infrastructure.SQLServer.Model
 {

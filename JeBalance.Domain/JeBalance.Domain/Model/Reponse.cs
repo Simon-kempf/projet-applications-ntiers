@@ -22,6 +22,9 @@ namespace JeBalance.Domain.Model
 
 		public Reponse()
 		{
+			Horodatage = DateTime.Now;
+			Type = Type.NONE;
+			Retribution = 0;
 		}
 
 		public override bool Equals(object? obj)

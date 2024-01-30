@@ -15,21 +15,32 @@ namespace JeBalance.Domain.Model
 
 		public Prenom? Prenom { get; set; }
 		public Statut Statut { get; set; }
+		public bool estVIP { get; set; }
+		public bool estCalomniateur { get; set; }
+		public Role Role { get; set; }
 
 		public Adresse Adresse { get; set; }
+
 		public Personne(string nom, string prenom) : base(0)
         {
             Nom = new Nom(nom);
             Prenom = new Prenom(prenom);
             Statut = Statut.NONE;
-        }
+			estVIP = false;
+			estCalomniateur = false;
+			Role = Role.NONE;
+
+		}
         public Personne(int id, string nom, string prenom) :
        base(id)
         {
             Nom = new Nom(nom);
             Prenom = new Prenom(prenom);
             Statut = Statut.NONE;
-        }
+			estVIP = false;
+			estCalomniateur = false;
+			Role = Role.NONE;
+		}
 
 		public Personne(int id, string nom, string prenom, Statut statut, Adresse adresse) :
 	   base(id)
@@ -38,6 +49,9 @@ namespace JeBalance.Domain.Model
 			Prenom = new Prenom(prenom);
 			Statut = statut;
 			Adresse = adresse;
+			estVIP = false;
+			estCalomniateur = false;
+			Role = Role.NONE;
 		}
 
 		public Personne(string nom, string prenom, Statut statut, Adresse adresse) :
@@ -47,6 +61,9 @@ namespace JeBalance.Domain.Model
 			Prenom = new Prenom(prenom);
 			Statut = statut;
 			Adresse = adresse;
+			estVIP = false;
+			estCalomniateur = false;
+			Role = Role.NONE;
 		}
 
 		public Personne(int id) : base(id)
@@ -55,9 +72,16 @@ namespace JeBalance.Domain.Model
 
 		public Personne() : base(0) { }
 
-		public string ToSQLSPersonne()
+		public Personne(int id, string nom, string prenom, Statut statut, bool vip, bool calomniateur, Role role, Adresse adresse) : base(id)
 		{
-			throw new NotImplementedException();
+			Nom = new Nom(nom);
+			Prenom = new Prenom(prenom);
+			Statut = statut;
+			Adresse = adresse;
+			estVIP = vip;
+			estCalomniateur = calomniateur;
+			Role = role;
+
 		}
 	}
 }

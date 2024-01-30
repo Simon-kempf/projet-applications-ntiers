@@ -1,12 +1,11 @@
 ﻿using API.Parameters;
 using API.Resources;
-using JeBalance.Domain.Model;
 using JeBalance.Domain.Queries;
-using JeBalance.Domain.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using JeBalance.Domain.ValueObjects;
+using JeBalance.Domain.Commands.PersonneCommands;
 
 namespace API.Controllers
 {
@@ -51,24 +50,24 @@ namespace API.Controllers
 		public async Task<IActionResult> Get(int id)
 		{
 			var query = new GetOnePersonneQuery(id);
-			var place = await _mediator.Send(query);
-			return Ok(place);
+			var personne = await _mediator.Send(query);
+			return Ok(personne);
 		}
 
 
 		[HttpPost]
-		public async Task<IActionResult> Post([FromBody] PersonneAPI resource)
+		public async Task<IActionResult> Post([FromBody] PersonneAPICreation resource)
 		{
-			var command = new CreatePersonneCommand(resource.Nom, resource.Prenom, resource.Statut, resource.Adresse);
+			var command = new CreatePersonneCommand(resource.Nom, resource.Prenom, resource.Statut, resource.CodePostal, resource.NomDeCommune, resource.NomDeVoie, resource.NumeroDeVoie);
 			var id = await _mediator.Send(command);
 			return Ok(id);
 		}
 
 		
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Put(int id, [FromBody] PersonneAPI resource)
+		public async Task<IActionResult> Put(int id, [FromBody] PersonneAPIUpdate resource)
 		{
-			var command = new UpdatePersonneCommand(id, resource.Nom, resource.Prenom, resource.Statut, resource.Adresse);
+			var command = new UpdatePersonneCommand(id, resource.Nom, resource.Prenom, resource.Statut, resource.estVIP, resource.estCalomniateur, resource.Role, resource.CodePostal, resource.NomDeCommune, resource.NomDeVoie, resource.NumeroDeVoie);
 			await _mediator.Send(command);
 			return Ok(id);
 		}

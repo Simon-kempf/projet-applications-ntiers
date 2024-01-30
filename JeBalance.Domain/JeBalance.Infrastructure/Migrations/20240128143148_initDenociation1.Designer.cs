@@ -4,6 +4,7 @@ using JeBalance.Infrastructure.SQLServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240128143148_initDenociation1")]
+    partial class initDenociation1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,8 +85,7 @@ namespace JeBalance.Infrastructure.Migrations
 
                     b.Property<string>("Adresse")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("adresse");
 
                     b.Property<string>("Nom")
@@ -99,21 +100,9 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("prenom");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int")
-                        .HasColumnName("role");
-
                     b.Property<int>("Statut")
                         .HasColumnType("int")
                         .HasColumnName("statut");
-
-                    b.Property<int>("estCalomniateur")
-                        .HasColumnType("int")
-                        .HasColumnName("estCalomniateur");
-
-                    b.Property<int>("estVIP")
-                        .HasColumnType("int")
-                        .HasColumnName("estVIP");
 
                     b.HasKey("Id");
 

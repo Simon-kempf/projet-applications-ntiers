@@ -10,5 +10,6 @@ namespace JeBalance.Domain.Repositories
 {
 	public interface IDenonciationRepository : Repository<Denonciation>
 	{
+		Task<int> Update(int id, Reponse reponse);
 	}
 }
