@@ -19,24 +19,6 @@ namespace API.Controllers
 		{
 			_mediator = mediator;
 		}
-        /**
-		[HttpGet]
-		public async Task<IActionResult> Get([FromQuery] FindPersonnesParameter parameter)
-		{
-			var query = new FindPersonnesQuery(
-				parameter.Limit,
-				parameter.Offset,
-				parameter.Nom,
-				parameter.Prenom);
-
-			var response = await _mediator.Send(query);
-			Response.Headers.Add("X-Pagination-Limit", parameter.Limit.ToString());
-			Response.Headers.Add("X-Pagination-Offset", parameter.Offset.ToString());
-			Response.Headers.Add("X-Pagination-Count", response.Results.Count().ToString());
-			Response.Headers.Add("X-Pagination-Total", response.Total.ToString());
-			return Ok(response.Results);
-		}
-		*/
 
         [HttpGet]
         public async Task<IActionResult> GetOne([FromQuery] FindOnePersonneParameter parameter)
