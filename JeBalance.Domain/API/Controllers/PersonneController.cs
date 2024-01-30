@@ -6,6 +6,7 @@ using JeBalance.Domain.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using JeBalance.Domain.ValueObjects;
 
 namespace API.Controllers
 {
@@ -19,7 +20,7 @@ namespace API.Controllers
 		{
 			_mediator = mediator;
 		}
-
+        /**
 		[HttpGet]
 		public async Task<IActionResult> Get([FromQuery] FindPersonnesParameter parameter)
 		{
@@ -27,9 +28,7 @@ namespace API.Controllers
 				parameter.Limit,
 				parameter.Offset,
 				parameter.Nom,
-				parameter.Prenom,
-				parameter.id,
-				parameter.Statut);
+				parameter.Prenom);
 
 			var response = await _mediator.Send(query);
 			Response.Headers.Add("X-Pagination-Limit", parameter.Limit.ToString());
@@ -38,8 +37,17 @@ namespace API.Controllers
 			Response.Headers.Add("X-Pagination-Total", response.Total.ToString());
 			return Ok(response.Results);
 		}
+		*/
 
-		[HttpGet("{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetOne([FromQuery] FindOnePersonneParameter parameter)
+        {
+            var query = new GetOnePersonneNameSurnameQuery(parameter.Nom!,parameter.Prenom!,parameter.CodePostal!,parameter.NomDeCommune!,parameter.NomDeVoie!,parameter.NumeroDeVoie!);
+            var place = await _mediator.Send(query);
+            return Ok(place);
+        }
+
+        [HttpGet("{id}")]
 		public async Task<IActionResult> Get(int id)
 		{
 			var query = new GetOnePersonneQuery(id);

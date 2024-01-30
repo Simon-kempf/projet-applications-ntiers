@@ -1,3 +1,5 @@
+using JeBalance.Domain.ValueObjects;
+
 namespace JeBalance.Domain.Contracts;
 
 public interface Repository<T> where T : Entity
