@@ -11,5 +11,6 @@ namespace JeBalance.Domain.Repositories
 	public interface IVIPRepository : Repository<Personne>
 	{
 		public Task<(IEnumerable<Personne> Results, int Total)> Find(int limit, int offset, Specification<Personne> specification);
+		public Task<bool> Create(int id);
 	}
 }

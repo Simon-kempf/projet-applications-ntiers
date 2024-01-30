@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JeBalance.Infrastructure.Migrations
 {
-    public partial class modifsDenonciations0 : Migration
+    public partial class vips0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

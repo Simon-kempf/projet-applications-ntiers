@@ -13,10 +13,10 @@ namespace JeBalance.Domain.Queries.VIP
 		public (int Limit, int Offset) Pagination { get; }
 		public FindVIPsSpecification Specification { get; }
 
-		public FindVIPsQuery(int limit, int offset, string? name, string? surname)
+		public FindVIPsQuery(int limit, int offset)
 		{
 			Pagination = (limit, offset);
-			Specification = new FindVIPsSpecification(name, surname);
+			Specification = new FindVIPsSpecification();
 		}
 	}
 }

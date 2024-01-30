@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240130011041_modifsDenonciations1")]
-    partial class modifsDenonciations1
+    [Migration("20240130211829_vips0")]
+    partial class vips0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

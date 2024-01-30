@@ -37,8 +37,8 @@ namespace API.Controllers
 		public async Task<IActionResult> GetNonTraitees([FromQuery] FindNonTraiteesParameter parameter)
 		{
 			var query = new FindDenonciationsNonTraiteesQuery(parameter.Limit, parameter.Offset);
-			var denonciation = await _mediator.Send(query);
-			return Ok(denonciation);
+			var reponse = await _mediator.Send(query);
+			return Ok(reponse.Results);
 		}
 
 

@@ -105,8 +105,8 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 			personne.Nom,
 			personne.Prenom,
 			(Statut)personne.Statut,
-			personne.estVIP == 1 ? true : false,
-			personne.estCalomniateur == 1 ? true : false,
+			personne.estVIP == 1,
+			personne.estCalomniateur == 1,
 			(Role)personne.Role,
 			personne.Adresse.toDomain()) ;
 		}
