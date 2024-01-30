@@ -14,6 +14,7 @@ namespace JeBalance.Domain.Model
 		public NomDeCommune NomDeCommune { get; set; }
 		public NomDeVoie NomDeVoie { get; set; }
 		public NumeroDeVoie NumeroDeVoie { get; set; }
+		public const int MAX_LENGTH = 150;//Utilisé pour le stockage en BDD
 
 		public Adresse()
 		{

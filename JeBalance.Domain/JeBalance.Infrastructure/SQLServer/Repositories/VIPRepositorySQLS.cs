@@ -1,6 +1,5 @@
 ﻿using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Model.Utilisateurs;
 using JeBalance.Domain.Repositories;
 using JeBalance.Infrastructure.SQLServer.Model;
 using Microsoft.EntityFrameworkCore;

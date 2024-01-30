@@ -1,6 +1,5 @@
 ﻿using API.Business;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Model.Utilisateurs;
 
 namespace API.DataAccess
 {
