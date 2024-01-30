@@ -18,4 +18,6 @@ public interface IPersonneRepository : Repository<Personne>
     
     Task<IEnumerable<Personne>> FindAll(params Specification<Personne>[] specifications);
 
+	Task<int> Update(int id, Personne personne);
+
 }

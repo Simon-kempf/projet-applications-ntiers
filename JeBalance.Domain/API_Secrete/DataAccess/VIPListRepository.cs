@@ -1,6 +1,5 @@
 ﻿using API_Secrete.Business;
 using JeBalance.Domain.Model;
-using JeBalance.Domain.Model.Utilisateurs;
 
 namespace API_Secrete.DataAccess
 {
@@ -10,9 +9,9 @@ namespace API_Secrete.DataAccess
 
         public VIPListRepository()
         {
-            Ajouter(new VIP(0, "Jean", "Michel"));
-            Ajouter(new VIP(1, "Bertrand", "Richard"));
-            Ajouter(new VIP(2, "Claude", "François"));
+            Ajouter(new Personne(0, "Jean", "Michel"));
+            Ajouter(new Personne(1, "Bertrand", "Richard"));
+            Ajouter(new Personne(2, "Claude", "François"));
         }
 
         public Personne? Rechercher(int id)

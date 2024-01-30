@@ -1,0 +1,17 @@
+﻿using JeBalance.Domain.Model;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace JeBalance.Domain.Commands.VIPCommands
+{
+	public class CreateVIPCommand : IRequest<bool>
+	{
+		public int Id { get; }
+
+		public CreateVIPCommand(int id) => Id = id;
+	}
+}

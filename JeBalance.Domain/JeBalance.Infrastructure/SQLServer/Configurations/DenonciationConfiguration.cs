@@ -1,4 +1,5 @@
-﻿using JeBalance.Infrastructure.SQLServer.Model;
+﻿using JeBalance.Domain.ValueObjects;
+using JeBalance.Infrastructure.SQLServer.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -28,6 +29,12 @@ namespace JeBalance.Infrastructure.SQLServer.Configurations
                 .IsRequired();
             builder.Property(denonciation => denonciation.Horodatage)
                 .IsRequired();
-        }
+			builder.Property(denonciation => denonciation.PaysEvasion)
+				.IsRequired();
+            builder.Property(denonciation => denonciation.Reponse)
+                .IsRequired();
+            builder.Property(denonciation => denonciation.EstTraitee)
+                .IsRequired().HasColumnType("bit");
+		}
     }
 }
