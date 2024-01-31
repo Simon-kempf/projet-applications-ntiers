@@ -1,0 +1,33 @@
+﻿@using JeBalance.UI.Authentication
+@inherits LayoutComponentBase
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
+<PageTitle>ParkNGo (staging)</PageTitle>
+<div class="page">
+	<div class="sidebar">
+		<NavMenu />
+	</div>
+	<main>
+		<div class="top-row px-4">
+			<AuthorizeView>
+				<Authorized>
+					<a @onclick="Logout" href="javascript:void(0)">Se déconnecter</a>
+				</Authorized>
+				<NotAuthorized>
+					<a href="/login">Se connecter</a>
+				</NotAuthorized>
+			</AuthorizeView>
+		</div>
+		<article class="content px-4">
+			@Body
+		</article>
+	</main>
+</div>
+@code {
+	private async Task Logout()
+	{
+		var customASP = (CustomAuthenticationStateProvider)authStateProvider;
+		await customASP.UpdateAuthenticationState(null);
+		navManager.NavigateTo("/", true);
+	}
+}

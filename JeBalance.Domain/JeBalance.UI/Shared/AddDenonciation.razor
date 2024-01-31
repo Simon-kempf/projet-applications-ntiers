@@ -1,0 +1,48 @@
+﻿@page "/addDenonciation"
+@using JeBalance.Domain.Model
+@inject DenonciationService Service
+	<EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
+		<div class="form-group">
+			<label for="nom">Votre nom</label><br />
+			<InputText class="form-control" id="nom" @bind-
+				   Value="denonciation.Informateur!.Nom">@denonciation.Informateur!.Nom</InputText>
+			<label for="prenom">Votre prénom</label><br />
+			<InputText class="form-control" id="prenom" @bind-
+					   Value="denonciation.Informateur!.Prenom">@denonciation.Informateur!.Prenom</InputText>
+		</div>
+		<div class="form-group">
+			<label for="nom2">Nom du suspect</label><br />
+			<InputText class="form-control" id="nom2" @bind-
+					   Value="denonciation.Suspect!.Nom">@denonciation.Suspect!.Nom</InputText>
+			<label for="prenom2">Prénom du suspect</label><br />
+			<InputText class="form-control" id="prenom2" @bind-
+					   Value="denonciation.Suspect!.Prenom">@denonciation.Suspect!.Prenom</InputText>
+		</div>
+		<div class="form-group">
+			<label for="delit">Délit</label><br />
+			<InputText class="form-control" id="delit" @bind-
+					   Value="denonciation.Delit">@denonciation.Delit</InputText>
+			<label for="pays">Pays d'évasion</label><br />
+			<InputText class="form-control" id="pays" @bind-
+					   Value="denonciation.PaysEvasion">@denonciation.PaysEvasion</InputText>
+		</div>
+		<button type="submit" class="btn btn-primary">Sauvegarder</button>
+		<button @onclick="@(async () => await BlazoredModal.CancelAsync())"
+				class="btn btn-secondary">
+			Annuler
+		</button>
+	</EditForm>
+	@code {
+	[CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+	[Parameter] public int Id { get; set; }
+	Denonciation denonciation = new Denonciation();
+	protected override async Task OnInitializedAsync()
+	{
+		denonciation = await Service.GetDenonciationAsync(Id);
+	}
+	private async void FormSubmitted()
+	{
+		await Service.AddDenonciationAsync(denonciation);
+		await BlazoredModal.CloseAsync(ModalResult.Ok<Denonciation>(denonciation));
+	}
+}

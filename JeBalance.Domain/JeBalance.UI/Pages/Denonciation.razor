@@ -1,0 +1,72 @@
+﻿@page "/denonciation/{denonciationId:int}"
+@using JeBalance.Domain.Model
+@inject DenonciationService Service
+<PageTitle>@Title</PageTitle>
+	@if (denonciation == null)
+{
+	<p><em>Chargement...</em></p>
+}
+else
+{
+	<div class="row">
+		<div class="col-12">
+			<h4><span class="oi oi-list"></span> @Title</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<div class="col-6">
+				<button @onclick="@(() => Add())" class="btn btn-sm btnprimary">
+					<span class="oi oi-plus"></span>
+					Ajouter
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Horodatage</th>
+				<th>Informateur</th>
+				<th>Suspect</th>
+				<th>Délit</th>
+				<th>Pays d'évasion</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>@denonciation.Horodatage</td>
+				<td>@denonciation.Informateur!.Nom @denonciation.Informateur!.Prenom</td>
+				<td>@denonciation.Suspect!.Nom @denonciation.Suspect!.Prenom</td>
+				<td>@denonciation.Delit</td>
+				<td>@denonciation.PaysEvasion</td>
+			</tr>
+		</tbody>
+	</table>
+}
+
+@code {
+	[Parameter] public int denonciationId { get; set; }
+	private const string Title = "Dénonciation";
+	private JeBalance.Domain.Model.Denonciation? denonciation;
+	[CascadingParameter]
+	public IModalService Modal { get; set; } = default!;
+	protected override async Task OnInitializedAsync()
+	{
+		await FetchData();
+	}
+	private async Task FetchData()
+	{
+		denonciation = await Service.GetDenonciationAsync(denonciationId);
+	}
+	async Task Add()
+	{
+		var modal = Modal.Show<AddDenonciation>("Ajout d'une dénonciation");
+		var result = await modal.Result;
+		if (!result.Cancelled)
+		{
+			await FetchData();
+		}
+	}
+}
