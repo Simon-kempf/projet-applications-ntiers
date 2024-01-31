@@ -47,9 +47,12 @@ public class DenonciationRepositorySQLS : IDenonciationRepository
 	public async Task<int> Update(int id, Reponse reponse)
 	{
 		var denonciationToUpdate = _context.Denonciations.First(place => place.Id == id);
-		denonciationToUpdate.Reponse = reponse.ToSQLS();
-        denonciationToUpdate.EstTraitee = true;
-		await _context.SaveChangesAsync();
+        if (!denonciationToUpdate.EstTraitee)
+        {
+			denonciationToUpdate.Reponse = reponse.ToSQLS();
+			denonciationToUpdate.EstTraitee = true;
+			await _context.SaveChangesAsync();
+		}
 		return id;
 	}
 
