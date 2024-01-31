@@ -14,26 +14,26 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 	public class PersonneSQLS : Personne
 	{
 		[Column("id")]
-		public int Id { get; set; }
+		public new int Id { get; set; }
 
 		[Column("nom")]
-		public String Nom { get; set; }
+		public new String Nom { get; set; }
 
 		[Column("prenom")]
-		public String Prenom { get; set; }
+		public new String Prenom { get; set; }
 
 		[Column("statut")]
-		public int Statut { get; set; }
+		public new int Statut { get; set; }
 		[Column("estVIP")]
 		public int estVIP { get; set; }
 
 		[Column("estCalomniateur")]
-		public int estCalomniateur { get; set; }
+		public new int estCalomniateur { get; set; }
 		[Column("role")]
-		public int Role { get; set; }
+		public new int Role { get; set; }
 
 		[Column("adresse")]
-		public string Adresse { get; set; }
+		public new string Adresse { get; set; }
 
 	}
 }

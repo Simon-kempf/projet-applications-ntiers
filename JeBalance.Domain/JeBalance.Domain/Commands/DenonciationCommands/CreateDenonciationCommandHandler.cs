@@ -1,5 +1,6 @@
 ﻿using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
+using JeBalance.Domain.ValueObjects;
 using MediatR;
 
 namespace JeBalance.Domain.Commands.DenonciationCommands
@@ -28,10 +29,14 @@ namespace JeBalance.Domain.Commands.DenonciationCommands
 													command.Denonciation.Suspect!.Adresse.NumeroDeVoie.Value).toString();
 			try
 			{
-				await _personneRepository.GetOne(command.Denonciation.Informateur.Nom!.Value,
+				var informateur = await _personneRepository.GetOne(command.Denonciation.Informateur.Nom!.Value,
 																	command.Denonciation.Informateur.Prenom!.Value,
 																	adresseInformateur
 																	);
+				if (informateur.estCalomniateur)
+				{
+					return -1;
+				}
 			}
 			catch( Exception ex )
 			{
@@ -39,10 +44,20 @@ namespace JeBalance.Domain.Commands.DenonciationCommands
 			}
 			try
 			{
-				await _personneRepository.GetOne(command.Denonciation.Suspect.Nom!.Value,
+				var supect = await _personneRepository.GetOne(command.Denonciation.Suspect.Nom!.Value,
 																	command.Denonciation.Suspect.Prenom!.Value,
 																	adresseSuspect
 																	);
+				if (supect.estVIP)
+				{
+					var informateur = await _personneRepository.GetOne(command.Denonciation.Informateur.Nom!.Value,
+																	command.Denonciation.Informateur.Prenom!.Value,
+																	adresseInformateur
+																	);
+
+					await _personneRepository.Update(informateur.Id, new Personne(informateur.Id, informateur.Nom!.Value, informateur.Prenom!.Value, informateur.Statut, informateur.estVIP, true, informateur.Role, informateur.Adresse));
+					return -1;
+				}
 			}
 			catch ( Exception ex )
 			{
