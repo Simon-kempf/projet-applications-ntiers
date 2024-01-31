@@ -60,13 +60,12 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 			}
 		}
 		
-		public Task<(IEnumerable<Personne> Results, int Total)> Find(
+		public Task<(IEnumerable<Personne> Results, int Total)> GetVIPs(
 			int limit,
-			int offset,
-			Specification<Personne> specification)
+			int offset)
 		{
 			var results = _context.Personnes
-			.Apply(specification.ToSQLSExpression<Personne, PersonneSQLS>())
+			.Where(personne => personne.estVIP == 1)
 			.Skip(offset)
 			.Take(limit)
 			.AsEnumerable()
