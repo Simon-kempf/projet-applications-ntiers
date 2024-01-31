@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JeBalance.Infrastructure.Migrations
 {
-    public partial class t0 : Migration
+    public partial class vips0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,8 @@ namespace JeBalance.Infrastructure.Migrations
                     paysEvasion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     informateur = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     suspect = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    reponse = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    reponse = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    estTraitee = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,7 +43,11 @@ namespace JeBalance.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     prenom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    statut = table.Column<int>(type: "int", nullable: false)
+                    statut = table.Column<int>(type: "int", nullable: false),
+                    estVIP = table.Column<int>(type: "int", nullable: false),
+                    estCalomniateur = table.Column<int>(type: "int", nullable: false),
+                    role = table.Column<int>(type: "int", nullable: false),
+                    adresse = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {

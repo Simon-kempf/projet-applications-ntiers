@@ -8,9 +8,9 @@ public class FindPersonnesQuery : IRequest<(IEnumerable<Personne> Results, int T
     public (int Limit, int Offset) Pagination { get; }
     public FindPersonnesSpecification Specification { get; }
 
-    public FindPersonnesQuery(int limit, int offset, string? nom, string? prenom, int? id, Statut? statut)
+    public FindPersonnesQuery(int limit, int offset, string? nom, string? prenom)
     {
         Pagination = (limit, offset);
-        Specification = new FindPersonnesSpecification(nom, prenom, id, statut);
+        Specification = new FindPersonnesSpecification(nom, prenom);
     }
 }

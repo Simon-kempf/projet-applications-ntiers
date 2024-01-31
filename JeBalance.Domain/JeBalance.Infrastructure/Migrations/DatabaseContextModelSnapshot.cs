@@ -35,6 +35,10 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("delit");
 
+                    b.Property<bool>("EstTraitee")
+                        .HasColumnType("bit")
+                        .HasColumnName("estTraitee");
+
                     b.Property<DateTime>("Horodatage")
                         .HasColumnType("datetime2")
                         .HasColumnName("horodatage");

@@ -20,27 +20,37 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 		}
 		public Task<int> Count(Specification<Personne> specification)
 		{
-			return Task.FromResult(_context.VIPs
+			return Task.FromResult(_context.Personnes
 			.Where(specification.IsSatisfiedBy)
 			.Count());
 		}
-		public async Task<int> Create(Personne vip)
+		public async Task<bool> Create(int id)
 		{
-			PersonneSQLS vipToSave = vip.ToSQLS();
-			await _context.VIPs.AddAsync(vipToSave);
-			await _context.SaveChangesAsync();
-			return vipToSave.Id;
+			try
+			{
+				PersonneSQLS vip = _context.Personnes.First(vip =>
+					vip.Id == id);
+				if (vip == null)
+					return false;
+				vip.estVIP = 1;
+				await _context.SaveChangesAsync();
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
 		}
 
 		public async Task<bool> Delete(int id)
 		{
 			try
 			{
-				var vip = await _context.VIPs.FirstOrDefaultAsync(vip =>
+				var vip = _context.Personnes.First(vip =>
 					vip.Id == id);
 				if (vip == null)
 					return true;
-				_context.Remove(vip);
+				vip.estVIP = 0;
 				await _context.SaveChangesAsync();
 				return true;
 			}
@@ -55,33 +65,24 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 			int offset,
 			Specification<Personne> specification)
 		{
-			var results = _context.VIPs
-			.Where(specification.IsSatisfiedBy)
+			var results = _context.Personnes
+			.Apply(specification.ToSQLSExpression<Personne, PersonneSQLS>())
 			.Skip(offset)
 			.Take(limit)
 			.AsEnumerable()
 			.Select(vip => vip.ToDomain());
-			return Task.FromResult((results, _context.VIPs.Count()));
+			return Task.FromResult((results, _context.Personnes.Count()));
 		}
 
 		public async Task<Personne> GetOne(int id)
 		{
-			var vip = await _context.VIPs.FirstAsync(vip => vip.Id == id);
+			var vip = await _context.Personnes.FirstAsync(vip => (vip.Id == id && vip.estVIP == 1));
 			return vip.ToDomain();
 		}
 		public Task<bool> HasAny(Specification<Personne> specification)
 		{
-			return _context.VIPs.AnyAsync(vip =>
+			return _context.Personnes.AnyAsync(vip =>
 		   specification.IsSatisfiedBy(vip));
-		}
-		
-		public async Task<int> Update(int id, Personne vip)
-		{
-			var vipToUpdate = _context.VIPs.First(vip => vip.Id == id);
-			vipToUpdate.Nom = vip.Nom!.Value;
-			vipToUpdate.Prenom = vip.Prenom!.Value;
-			await _context.SaveChangesAsync();
-			return id;
 		}
 
 	}

@@ -1,6 +1,7 @@
 ﻿using JeBalance.Domain.Contracts;
 using JeBalance.Domain.Model;
 using JeBalance.Domain.Repositories;
+using JeBalance.Domain.ValueObjects;
 using JeBalance.Infrastructure.SQLServer.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -80,7 +81,13 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 			return personne.ToDomain();
 		}
 
-		public Task<bool> HasAny(Specification<Personne> specifications)
+        public async Task<Personne> GetOne(string nom,string prenom,string adresse)
+        {
+            var personne = await _context.Personnes.FirstAsync(personne => (personne.Nom == nom && personne.Prenom == prenom && personne.Adresse == adresse));
+            return personne.ToDomain();
+        }
+
+        public Task<bool> HasAny(Specification<Personne> specifications)
 		{
 			return _context.Personnes.AnyAsync(personne => specifications.IsSatisfiedBy(personne));
 		}

@@ -10,6 +10,9 @@ namespace JeBalance.Domain.Repositories
 {
 	public interface IDenonciationRepository : Repository<Denonciation>
 	{
+		public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset, Specification<Denonciation> specification);
 		Task<int> Update(int id, Reponse reponse);
+		public Task<int> Create(Denonciation denonciation);
+
 	}
 }

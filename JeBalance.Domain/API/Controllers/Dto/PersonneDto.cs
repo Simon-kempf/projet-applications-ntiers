@@ -16,5 +16,17 @@ namespace API.Controllers.Dto
 
         [JsonPropertyName("prenom")]
         public Prenom? Prenom { get; set; }
+
+        [JsonPropertyName("codePostal")]
+        public CodePostal? codePostal { get; set; }
+
+        [JsonPropertyName("nomDeCommune")]
+        public NomDeCommune? nomDeCommune { get; set; }
+
+        [JsonPropertyName("nomDeVoie")]
+        public NomDeVoie? nomDeVoie { get; set; }
+
+        [JsonPropertyName("numeroDeVoie")]
+        public NumeroDeVoie? numeroDeVoie { get; set; }
     }
 }
