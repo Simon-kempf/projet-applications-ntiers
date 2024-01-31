@@ -28,7 +28,7 @@ namespace JeBalance.Infrastructure.SQLServer.Configurations
 			builder.Property(personne => personne.Statut)
 				.IsRequired().HasColumnType("int");
 			builder.Property(personne => personne.estVIP)
-				.IsRequired().HasColumnType("int").HasDefaultValue(0);
+				.IsRequired().HasColumnType("int");
 			builder.Property(personne => personne.estCalomniateur)
 				.IsRequired().HasColumnType("int");
 			builder.Property(personne => personne.Role)
