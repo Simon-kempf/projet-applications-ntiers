@@ -17,10 +17,9 @@ namespace JeBalance.Domain.Queries.VIP
 		public FindVIPsQueryHandler(IVIPRepository repository) => _repository = repository;
 		public Task<(IEnumerable<Personne> Results, int Total)> Handle(FindVIPsQuery query, CancellationToken cancellationToken)
 		{
-			return _repository.Find(
+			return _repository.GetVIPs(
 				query.Pagination.Limit,
-				query.Pagination.Offset,
-				query.Specification);
+				query.Pagination.Offset);
 		}
 	}
 }
