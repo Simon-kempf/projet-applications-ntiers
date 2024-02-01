@@ -1,5 +1,3 @@
-using API_Secrete.DataAccess;
-using API_Secrete.Business;
 using Microsoft.EntityFrameworkCore;
 using JeBalance.Infrastructure.SQLServer;
 using JeBalance.Infrastructure;
@@ -23,7 +21,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IVIPListRepository, VIPListRepository>();
 
 var app = builder.Build();
 

@@ -1,5 +1,3 @@
-using API.Business;
-using API.DataAccess;
 using JeBalance.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using JeBalance.Infrastructure.SQLServer;
@@ -8,8 +6,6 @@ using JeBalance.Infrastructure;
 using API;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddSingleton<IDenonciationRepository, DenonciationRepository>();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("localdb")),

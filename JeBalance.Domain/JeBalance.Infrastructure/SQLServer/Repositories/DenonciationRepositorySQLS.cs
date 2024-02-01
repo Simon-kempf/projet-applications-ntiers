@@ -46,20 +46,35 @@ public class DenonciationRepositorySQLS : IDenonciationRepository
 
 	public async Task<int> Update(int id, Reponse reponse)
 	{
-		var denonciationToUpdate = _context.Denonciations.First(place => place.Id == id);
-        if (!denonciationToUpdate.EstTraitee)
+        try
         {
-			denonciationToUpdate.Reponse = reponse.ToSQLS();
-			denonciationToUpdate.EstTraitee = true;
-			await _context.SaveChangesAsync();
+			var denonciationToUpdate = _context.Denonciations.First(place => place.Id == id);
+			if (!denonciationToUpdate.EstTraitee)
+			{
+				denonciationToUpdate.Reponse = reponse.ToSQLS();
+				denonciationToUpdate.EstTraitee = true;
+				await _context.SaveChangesAsync();
+			}
+			return id;
 		}
-		return id;
+        catch
+        {
+            return -1;
+        }
+		
 	}
 
 	public async Task<Denonciation> GetOne(int id)
 	{
-		var denonciation = await _context.Denonciations.FirstAsync(denonciation => denonciation.Id == id);
-		return denonciation.ToDomain();
+        try
+        {
+			var denonciation = await _context.Denonciations.FirstAsync(denonciation => denonciation.Id == id);
+			return denonciation.ToDomain();
+		}
+        catch
+        {
+            return null;
+        }
 	}
 
 	public Task<(IEnumerable<Denonciation> Results, int Total)> Find(int limit, int offset, Specification<Denonciation> specification)
