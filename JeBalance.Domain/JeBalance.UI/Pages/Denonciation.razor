@@ -1,7 +1,7 @@
 ﻿@page "/denonciation"
 @page "/denonciation/{denonciationId:int?}"
-@using JeBalance.Domain.Model
-@inject DenonciationService Service
+@using API.Resources
+@inject DenonciationConsultationService Service
 <PageTitle>@Title</PageTitle>
 	@if (denonciationId == 0)
 {
@@ -23,7 +23,7 @@
 }
 else if (denonciation == null)
 {
-	<p><em>Chargement...</em></p>
+	<p><em>Aucune dénonciation ne possède cet identifiant.</em></p>
 }
 else
 {
@@ -40,15 +40,21 @@ else
 				<th>Suspect</th>
 				<th>Délit</th>
 				<th>Pays d'évasion</th>
+				<th>Date de réponse</th>
+				<th>Statut</th>
+				<th>Rétribution</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td>@denonciation.Horodatage</td>
-				<td>@denonciation.Informateur</td>
-				<td>@denonciation.Suspect</td>
+				<td>@denonciation.Informateur.Nom.Value @denonciation.Informateur.Prenom.Value</td>
+				<td>@denonciation.Suspect.Nom.Value @denonciation.Suspect.Prenom.Value</td>
 				<td>@denonciation.Delit</td>
 				<td>@denonciation.PaysEvasion</td>
+				<td>@denonciation.Reponse.Horodatage</td>
+				<td>@denonciation.Reponse.Type</td>
+				<td>@denonciation.Reponse.Retribution €</td>
 			</tr>
 		</tbody>
 	</table>
@@ -57,7 +63,7 @@ else
 @code {
 	[Parameter] public int denonciationId { get; set; }
 	private const string Title = "Dénonciation";
-	private JeBalance.Domain.Model.Denonciation? denonciation;
+	private DenonciationConsultationAPI? denonciation;
 	[CascadingParameter]
 	public IModalService Modal { get; set; } = default!;
 	protected override async Task OnInitializedAsync()
@@ -70,7 +76,7 @@ else
 	}
 	async Task Add()
 	{
-		var modal = Modal.Show<AddDenonciation>("Ajout d'une dénonciation");
+		var modal = Modal.Show<AjoutDenonciation>("Ajout d'une dénonciation");
 		var result = await modal.Result;
 		if (!result.Cancelled)
 		{
