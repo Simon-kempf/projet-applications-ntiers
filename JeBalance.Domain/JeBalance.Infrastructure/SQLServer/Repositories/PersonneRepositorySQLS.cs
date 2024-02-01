@@ -83,7 +83,10 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 
         public async Task<Personne> GetOne(string nom,string prenom,string adresse)
         {
-            var personne = await _context.Personnes.FirstAsync(personne => (personne.Nom == nom && personne.Prenom == prenom && personne.Adresse == adresse));
+            var personne = await _context.Personnes.FirstAsync(personne => (
+			personne.Nom.Trim().ToLower() == nom.Trim().ToLower()
+			&& personne.Prenom.Trim().ToLower() == prenom.Trim().ToLower()
+			&& personne.Adresse.Trim().ToLower() == adresse.Trim().ToLower()));
             return personne.ToDomain();
         }
 
