@@ -3,11 +3,11 @@
 @using API.Resources
 @inject DenonciationConsultationService Service
 <PageTitle>@Title</PageTitle>
-	@if (denonciationId == 0)
+@if (denonciationId == 0)
 {
 	<div class="row">
 		<div class="col-12">
-			<h4><span class="oi oi-list"></span> @Title</h4>
+			<h4><span class="oi oi-list"></span> Ajouter une dénonciation</h4>
 		</div>
 	</div>
 	<div class="row">
@@ -29,20 +29,56 @@ else
 {
 	<div class="row">
 		<div class="col-12">
-			<h4><span class="oi oi-list"></span> @Title</h4>
+			<h4><span class="oi oi-list"></span> Statut de votre dénonciation</h4>
 		</div>
 	</div>
+	@if (denonciation.EstTraitee)
+	{
+		<p>Votre dénonciation a été traitée, vous pouvez consulter sa réponse ci-dessous.</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Date et heure de réponse</th>
+					<th>Statut</th>
+					<th>Rétribution</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>@denonciation.Reponse.Horodatage</td>
+					<td>
+						@{
+							switch (denonciation.Reponse.Type)
+							{
+								case 0:
+									<text>Non traitée</text>
+									break;
+								case 1:
+									<text>Confirmation</text>
+									break;
+								case 2:
+									<text>Rejet</text>
+									break;
+							}
+						}
+					</td>
+					<td>@denonciation.Reponse.Retribution €</td>
+				</tr>
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>Votre dénonciation n'a pas encore été traitée, vous pouvez consulter ses informations ci-dessous.</p>
+	}
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Horodatage</th>
+				<th>Date et heure de création</th>
 				<th>Informateur</th>
 				<th>Suspect</th>
 				<th>Délit</th>
 				<th>Pays d'évasion</th>
-				<th>Date de réponse</th>
-				<th>Statut</th>
-				<th>Rétribution</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,11 +86,23 @@ else
 				<td>@denonciation.Horodatage</td>
 				<td>@denonciation.Informateur.Nom.Value @denonciation.Informateur.Prenom.Value</td>
 				<td>@denonciation.Suspect.Nom.Value @denonciation.Suspect.Prenom.Value</td>
-				<td>@denonciation.Delit</td>
-				<td>@denonciation.PaysEvasion</td>
-				<td>@denonciation.Reponse.Horodatage</td>
-				<td>@denonciation.Reponse.Type</td>
-				<td>@denonciation.Reponse.Retribution €</td>
+				<td>
+					@{
+						switch (denonciation.Delit)
+						{
+							case Domain.Model.Delit.NONE:
+								<text>Non specifié</text>
+								break;
+							case Domain.Model.Delit.DissimulationDeRevenus:
+								<text>Dissimulation de revenus</text>
+								break;
+							case Domain.Model.Delit.EvasionFiscale:
+								<text>Evasion fiscale</text>
+								break;
+						}
+					}
+				</td>
+				<td>@denonciation.PaysEvasion.Value</td>
 			</tr>
 		</tbody>
 	</table>

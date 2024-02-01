@@ -14,8 +14,10 @@ namespace API.Resources
 		public PersonneAPIConsultation Suspect { get; set; }
 		[JsonPropertyName("delit")]
 		public Delit Delit { get; set; }
-		[JsonPropertyName("paysevasion")]
+		[JsonPropertyName("paysEvasion")]
 		public ValueAPI PaysEvasion { get; set; }
+		[JsonPropertyName("estTraitee")]
+		public bool EstTraitee { get; set; }
 		[JsonPropertyName("reponse")]
 		public ReponseAPI Reponse { get; set; }
 
