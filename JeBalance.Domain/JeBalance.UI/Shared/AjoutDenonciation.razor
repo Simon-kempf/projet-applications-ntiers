@@ -28,10 +28,17 @@
 			<InputSelect @bind-Value="@denonciation.Delit">
 			@foreach (var delit in Enum.GetValues<Delit>())
 			{
-				<option value="@delit">@delit</option>
+				@if (delit == Delit.DissimulationDeRevenus)
+				{
+					<option value="@delit" selected>Dissimulation de revenus</option>
+				}
+				else if (delit == Delit.EvasionFiscale)
+				{
+					<option value="@delit">Evasion fiscale</option>
+				}
 			}
-		</InputSelect><br />
-			<label for="pays">Pays d'évasion</label><br />
+			</InputSelect><br />
+			<label for="pays">Pays d'évasion (si évasion fiscale)</label><br />
 			<InputText class="form-control" id="pays" @bind-Value="denonciation.PaysEvasion">@denonciation.PaysEvasion</InputText>
 		</div>
 		<button type="submit" class="btn btn-primary">Ajouter</button>

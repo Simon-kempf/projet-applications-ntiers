@@ -6,7 +6,9 @@ namespace API.Resources
 {
 	public class DenonciationConsultationAPI
 	{
-		[JsonPropertyName("horodatage")]
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+        [JsonPropertyName("horodatage")]
 		public DateTime Horodatage { get; set; }
 		[JsonPropertyName("informateur")]
 		public PersonneAPIConsultation Informateur { get; set; }

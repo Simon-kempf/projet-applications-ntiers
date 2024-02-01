@@ -10,16 +10,23 @@
 			<h4><span class="oi oi-list"></span> Ajouter une dénonciation</h4>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-6">
+	@if (denonciation == null)
+	{
+		<div class="row">
 			<div class="col-6">
-				<button @onclick="@(() => Add())" class="btn btn-sm btnprimary">
-					<span class="oi oi-plus"></span>
-					Ajouter
-				</button>
+				<div class="col-6">
+					<button @onclick="@(() => Add())" class="btn btn-sm btnprimary">
+						<span class="oi oi-plus"></span>
+						Ajouter
+					</button>
+				</div>
 			</div>
 		</div>
-	</div>
+	}
+	else
+	{
+		<p>Dénonciation créée. Conservez ce lien pour suivre votre dénonciation : <a href="./@denonciation.Id">/@denonciation.Id</a>.</p>
+	}
 }
 else if (denonciation == null)
 {
@@ -27,16 +34,6 @@ else if (denonciation == null)
 }
 else
 {
-	<div class="row">
-		<div class="col-6">
-			<div class="col-6">
-				<button @onclick="@(() => Edit())" class="btn btn-sm btnprimary">
-					<span class="oi oi-pencil"></span>
-					Modifier
-				</button>
-			</div>
-		</div>
-	</div>
 	<div class="row">
 		<div class="col-12">
 			<h4><span class="oi oi-list"></span> Statut de votre dénonciation</h4>
@@ -79,7 +76,7 @@ else
 	}
 	else
 	{
-		<p>Votre dénonciation n'a pas encore été traitée, vous pouvez consulter ses informations ci-dessous.</p>
+		<p>Nous avons bien reçu votre dénonciation et celle-ci n'a pas encore été traitée, vous pouvez consulter ses informations ci-dessous. Conservez le lien pour suivre la dénonciation.</p>
 	}
 	<table class="table">
 		<thead>
@@ -135,15 +132,6 @@ else
 	async Task Add()
 	{
 		var modal = Modal.Show<AjoutDenonciation>("Ajout d'une dénonciation");
-		var result = await modal.Result;
-		if (!result.Cancelled)
-		{
-			await FetchData();
-		}
-	}
-	async Task Edit()
-	{
-		var modal = Modal.Show<ModifDenonciation>("Modification d'une dénonciation");
 		var result = await modal.Result;
 		if (!result.Cancelled)
 		{
