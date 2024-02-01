@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using JeBalance.Domain.Model;
-using API.Business;
-using API.Controllers.Dto;
 using System;
 using API.Parameters;
 using API.Resources;
@@ -30,6 +28,10 @@ namespace API.Controllers
 		{
 			var query = new GetOneDenonciationQuery(id);
 			var denonciation = await _mediator.Send(query);
+			if(denonciation == null)
+			{
+				return BadRequest("Aucune dénonciation ne correspond à cet identifiant");
+			}
 			return Ok(denonciation);
 		}
 
@@ -56,8 +58,12 @@ namespace API.Controllers
 		public async Task<IActionResult> Put(int id, [FromBody] DenonciationUpdateAPI resource)
 		{
 			var command = new UpdateDenonciationCommand(id, resource.TypeReponse, resource.Retribution);
-			await _mediator.Send(command);
-			return Ok(id);
+			int retour = await _mediator.Send(command);
+			if (retour == -1)
+			{
+				return BadRequest("Aucune dénonciation ne correspond à cet identifiant");
+			}
+			return Ok(retour);
 		}
 
 

@@ -24,6 +24,9 @@ namespace API_Secrete.Controllers
 		{
 			var query = new GetOneVIPQuery(id);
 			var personne = await _mediator.Send(query);
+			if (personne == null) {
+				return BadRequest("Aucun VIP ne correspond à cet identifiant");
+			}
 			return Ok(personne);
 		}
 
