@@ -7,13 +7,21 @@
 			<label for="nom">Votre nom</label><br />
 			<InputText class="form-control" id="nom" @bind-Value="denonciation.NomInformateur">@denonciation.NomInformateur</InputText>
 			<label for="prenom">Votre prénom</label><br />
-			<InputText class="form-control" id="prenom" @bind-Value="denonciation.PrenomInformateur">@denonciation.PrenomInformateur</InputText>
+			<InputText class="form-control" id="prenom" @bind-Value="denonciation.PrenomInformateur">@denonciation.PrenomInformateur</InputText><br />
+			<label for="numero">Numéro de voie</label> <InputNumber class="form-control" id="numero" @bind-Value="denonciation.NumeroDeVoieInformateur">@denonciation.NumeroDeVoieInformateur</InputNumber>
+			<label for="rue">Rue</label> <InputText class="form-control" id="rue" @bind-Value="denonciation.NomDeVoieInformateur">@denonciation.NomDeVoieInformateur</InputText><br />
+			<label for="cp">Code postal</label> <InputNumber class="form-control" id="cp" @bind-Value="denonciation.CodePostalInformateur">@denonciation.CodePostalInformateur</InputNumber>
+			<label for="commune">Commune</label> <InputText class="form-control" id="commune" @bind-Value="denonciation.NomDeCommuneInformateur">@denonciation.NomDeCommuneInformateur</InputText>
 		</div>
 		<div class="form-group">
 			<label for="nom">Nom du suspect</label><br />
 			<InputText class="form-control" id="nom2" @bind-Value="denonciation.NomSuspect">@denonciation.NomSuspect</InputText>
 			<label for="prenom">Prénom du suspect</label><br />
-			<InputText class="form-control" id="prenom2" @bind-Value="denonciation.PrenomSuspect">@denonciation.PrenomSuspect</InputText>
+			<InputText class="form-control" id="prenom2" @bind-Value="denonciation.PrenomSuspect">@denonciation.PrenomSuspect</InputText><br />
+			<label for="numero2">Numéro de voie</label> <InputNumber class="form-control" id="numero2" @bind-Value="denonciation.NumeroDeVoieSuspect">@denonciation.NumeroDeVoieSuspect</InputNumber>
+			<label for="rue2">Rue</label> <InputText class="form-control" id="rue2" @bind-Value="denonciation.NomDeVoieSuspect">@denonciation.NomDeVoieSuspect</InputText><br />
+			<label for="cp2">Code postal</label> <InputNumber class="form-control" id="cp2" @bind-Value="denonciation.CodePostalSuspect">@denonciation.CodePostalSuspect</InputNumber>
+			<label for="commune2">Commune</label> <InputText class="form-control" id="commune2" @bind-Value="denonciation.NomDeCommuneSuspect">@denonciation.NomDeCommuneSuspect</InputText>
 		</div>
 		<div class="form-group">
 			<label for="delit">Délit</label><br />
