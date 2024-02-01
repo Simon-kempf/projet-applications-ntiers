@@ -36,6 +36,7 @@ public class ServiceBase<SourceType>
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         return request;
     }
+
     public async Task<HttpRequestMessage> MakeGetOneRequest(int id)
     {
         var token = await _casp.GetJWT();
@@ -55,6 +56,7 @@ public class ServiceBase<SourceType>
         var data = await JsonSerializer.DeserializeAsync<SourceType[]>(responseStream);
         return data;
     }
+
     public async Task<SourceType> SendGetOneRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
@@ -64,6 +66,7 @@ public class ServiceBase<SourceType>
         var data = await JsonSerializer.DeserializeAsync<SourceType>(responseStream);
         return data;
     }
+
     public async Task<HttpRequestMessage> MakeAddRequest(SourceType data)
     {
         var token = await _casp.GetJWT();
@@ -84,6 +87,7 @@ public class ServiceBase<SourceType>
 
         return request;
     }
+
     public async Task<int> SendAddRequest(HttpRequestMessage request)
     {
         var client = _clientFactory.CreateClient();
@@ -95,6 +99,7 @@ public class ServiceBase<SourceType>
         var id = await JsonSerializer.DeserializeAsync<int>(responseStream);
         return id;
     }
+
 	public async Task<HttpRequestMessage> MakeUpdateRequest(int id, SourceType data)
 	{
 		var token = await _casp.GetJWT();
@@ -115,6 +120,7 @@ public class ServiceBase<SourceType>
 
 		return request;
 	}
+
 	public async Task<int> SendUpdateRequest(HttpRequestMessage request)
 	{
 		var client = _clientFactory.CreateClient();
@@ -125,31 +131,5 @@ public class ServiceBase<SourceType>
 		using var responseStream = await response.Content.ReadAsStreamAsync();
 		var id = await JsonSerializer.DeserializeAsync<int>(responseStream);
 		return id;
-	}
-	public async Task<HttpRequestMessage> MakeDeleteRequest(int id)
-	{
-		var token = await _casp.GetJWT();
-
-		var request = new HttpRequestMessage(
-			HttpMethod.Delete,
-			$"{Endpoint}/{id}");
-
-		request.Headers.Add("Accept", "application/json");
-		request.Headers.Add("User-Agent", "JeBalance");
-		request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-		return request;
-	}
-
-	public async Task<bool> SendDeleteRequest(HttpRequestMessage request)
-	{
-		var client = _clientFactory.CreateClient();
-
-		var response = await client.SendAsync(request);
-		if (!response.IsSuccessStatusCode) return false;
-
-		using var responseStream = await response.Content.ReadAsStreamAsync();
-		var result = await JsonSerializer.DeserializeAsync<bool>(responseStream);
-		return result;
 	}
 }

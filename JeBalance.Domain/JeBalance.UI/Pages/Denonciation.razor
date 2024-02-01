@@ -34,10 +34,6 @@ else
 					<span class="oi oi-pencil"></span>
 					Modifier
 				</button>
-				<button @onclick="@(() => Delete())" class="btn btn-sm btnprimary">
-					<span class="oi oi-trash"></span>
-					Supprimer
-				</button>
 			</div>
 		</div>
 	</div>
@@ -148,15 +144,6 @@ else
 	async Task Edit()
 	{
 		var modal = Modal.Show<ModifDenonciation>("Modification d'une dénonciation");
-		var result = await modal.Result;
-		if (!result.Cancelled)
-		{
-			await FetchData();
-		}
-	}
-	async Task Delete()
-	{
-		var modal = Modal.Show<SupprDenonciation>("Suppression d'une dénonciation");
 		var result = await modal.Result;
 		if (!result.Cancelled)
 		{
