@@ -1,7 +1,7 @@
-﻿@page "/ajoutDenonciation"
+﻿@page "/modifDenonciation"
 @using API.Resources
 @using JeBalance.Domain.Model
-@inject DenonciationCreationService Service
+@inject DenonciationModifService Service
 	<EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
 		<div class="form-group">
 			<label for="nom">Votre nom</label><br />
@@ -34,7 +34,7 @@
 			<label for="pays">Pays d'évasion</label><br />
 			<InputText class="form-control" id="pays" @bind-Value="denonciation.PaysEvasion">@denonciation.PaysEvasion</InputText>
 		</div>
-		<button type="submit" class="btn btn-primary">Ajouter</button>
+		<button type="submit" class="btn btn-primary">Sauvegarder</button>
 		<button @onclick="@(async () => await BlazoredModal.CancelAsync())"
 				class="btn btn-secondary">
 			Annuler
@@ -43,12 +43,12 @@
 	@code {
 	[CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
 
-	DenonciationCreationAPI denonciation = new DenonciationCreationAPI();
+	DenonciationUpdateAPI denonciation = new DenonciationUpdateAPI();
 
 	private async void FormSubmitted()
 	{
-		await Service.AddDenonciationAsync(denonciation);
+		await Service.ModifDenonciationAsync(denonciation);
 
-		await BlazoredModal.CloseAsync(ModalResult.Ok<DenonciationCreationAPI>(denonciation));
+		await BlazoredModal.CloseAsync(ModalResult.Ok<DenonciationUpdateAPI>(denonciation));
 	}
 }

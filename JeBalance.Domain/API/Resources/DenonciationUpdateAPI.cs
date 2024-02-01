@@ -3,7 +3,7 @@ using JeBalance.Domain.ValueObjects;
 
 namespace API.Resources
 {
-	public class DenonciationUpdateAPI
+	public class DenonciationUpdateAPI : DenonciationCreationAPI
 	{
 		//Tenter de faire en découpant les Personne et Reponse en petits champs
 		//Aussi, ne plus renseigner l'identifiant de l'Informateur et du Suspect... inutile
