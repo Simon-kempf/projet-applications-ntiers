@@ -75,8 +75,16 @@ namespace JeBalance.Infrastructure.SQLServer.Repositories
 
 		public async Task<Personne> GetOne(int id)
 		{
-			var vip = await _context.Personnes.FirstAsync(vip => (vip.Id == id && vip.estVIP == 1));
-			return vip.ToDomain();
+			try
+			{
+				var vip = await _context.Personnes.FirstAsync(vip => (vip.Id == id && vip.estVIP == 1));
+				return vip.ToDomain();
+			}
+			catch
+			{
+				return null;
+			}
+			
 		}
 		public Task<bool> HasAny(Specification<Personne> specification)
 		{
