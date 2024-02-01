@@ -16,11 +16,3 @@
 		</article>
 	</main>
 </div>
-@code {
-	private async Task Logout()
-	{
-		var customASP = (CustomAuthenticationStateProvider)authStateProvider;
-		await customASP.UpdateAuthenticationState(null);
-		navManager.NavigateTo("/", true);
-	}
-}

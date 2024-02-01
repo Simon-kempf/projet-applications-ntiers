@@ -19,7 +19,6 @@ builder.Services.AddSingleton<UserAccountService>();
 builder.Services.AddBlazoredModal();
 builder.Services.AddScoped<DenonciationCreationService>();
 builder.Services.AddScoped<DenonciationConsultationService>();
-builder.Services.AddScoped<DenonciationModifService>();
 
 var app = builder.Build();
 

@@ -99,37 +99,4 @@ public class ServiceBase<SourceType>
         var id = await JsonSerializer.DeserializeAsync<int>(responseStream);
         return id;
     }
-
-	public async Task<HttpRequestMessage> MakeUpdateRequest(int id, SourceType data)
-	{
-		var token = await _casp.GetJWT();
-
-		var request = new HttpRequestMessage(
-			HttpMethod.Put,
-			$"{Endpoint}/{id}");
-
-		var httpContent = new StringContent(
-			JsonSerializer.Serialize(data),
-			Encoding.UTF8,
-			"application/json");
-		request.Content = httpContent;
-
-		request.Headers.Add("Accept", "application/json");
-		request.Headers.Add("User-Agent", "JeBalance");
-		request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-		return request;
-	}
-
-	public async Task<int> SendUpdateRequest(HttpRequestMessage request)
-	{
-		var client = _clientFactory.CreateClient();
-
-		var response = await client.SendAsync(request);
-		if (!response.IsSuccessStatusCode) return 0;
-
-		using var responseStream = await response.Content.ReadAsStreamAsync();
-		var id = await JsonSerializer.DeserializeAsync<int>(responseStream);
-		return id;
-	}
 }
