@@ -1,4 +1,5 @@
-﻿using Blazored.Modal;
+﻿using API.Resources;
+using Blazored.Modal;
 using JeBalance.Domain.Model;
 using JeBalance.UI.Authentication;
 using JeBalance.UI.Data.Services;
@@ -7,14 +8,14 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace JeBalance.UI.Shared
 {
-	public class DenonciationService : ServiceBase<Denonciation>
+	public class DenonciationConsultationService : ServiceBase<DenonciationConsultationAPI>
 	{
 		private const string Controller = "Denonciation";
-		public DenonciationService(IHttpClientFactory clientFactory, AuthenticationStateProvider authStateProvider)
+		public DenonciationConsultationService(IHttpClientFactory clientFactory, AuthenticationStateProvider authStateProvider)
 		: base(clientFactory, (CustomAuthenticationStateProvider)authStateProvider, Controller)
 		{
 		}
-		public async Task<Denonciation[]> GetDenonciationsAsync(int limit = 10,	int offset = 0,	Statut? status = null)
+		public async Task<DenonciationConsultationAPI[]> GetDenonciationsAsync(int limit = 10,	int offset = 0,	Statut? status = null)
 		{
 			var request = await MakePaginatedGetAllRequest(
 			limit,
@@ -26,16 +27,11 @@ namespace JeBalance.UI.Shared
 			var denonciations = await SendGetAllPaginatedRequest(request);
 			return denonciations;
 		}
-		public async Task<Denonciation> GetDenonciationAsync(int id)
+		public async Task<DenonciationConsultationAPI> GetDenonciationAsync(int id)
 		{
 			var request = await MakeGetOneRequest(id);
 			var denonciation = await SendGetOneRequest(request);
 			return denonciation;
-		}
-
-		public async Task AddDenonciationAsync(Denonciation denonciation)
-		{
-			
 		}
 	}
 }

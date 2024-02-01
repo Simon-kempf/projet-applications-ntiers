@@ -12,13 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddSingleton<UserAccountService>();
 builder.Services.AddBlazoredModal();
-builder.Services.AddScoped<DenonciationService>();
+builder.Services.AddScoped<DenonciationCreationService>();
+builder.Services.AddScoped<DenonciationConsultationService>();
+builder.Services.AddScoped<DenonciationModifService>();
 
 var app = builder.Build();
 

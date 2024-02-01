@@ -2,21 +2,14 @@
 @inherits LayoutComponentBase
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
-<PageTitle>ParkNGo (staging)</PageTitle>
+<PageTitle>JeBalance (staging)</PageTitle>
 <div class="page">
 	<div class="sidebar">
 		<NavMenu />
 	</div>
 	<main>
 		<div class="top-row px-4">
-			<AuthorizeView>
-				<Authorized>
-					<a @onclick="Logout" href="javascript:void(0)">Se déconnecter</a>
-				</Authorized>
-				<NotAuthorized>
-					<a href="/login">Se connecter</a>
-				</NotAuthorized>
-			</AuthorizeView>
+			<a href="/denonciation">Créer une dénonciation</a>
 		</div>
 		<article class="content px-4">
 			@Body

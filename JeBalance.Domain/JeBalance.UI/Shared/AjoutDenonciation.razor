@@ -1,0 +1,54 @@
+﻿@page "/ajoutDenonciation"
+@using API.Resources
+@using JeBalance.Domain.Model
+@inject DenonciationCreationService Service
+	<EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
+		<div class="form-group">
+			<label for="nom">Votre nom</label><br />
+			<InputText class="form-control" id="nom" @bind-Value="denonciation.NomInformateur">@denonciation.NomInformateur</InputText>
+			<label for="prenom">Votre prénom</label><br />
+			<InputText class="form-control" id="prenom" @bind-Value="denonciation.PrenomInformateur">@denonciation.PrenomInformateur</InputText><br />
+			<label for="numero">Numéro de voie</label> <InputNumber style="width: 20%;" class="form-control" id="numero" @bind-Value="denonciation.NumeroDeVoieInformateur">@denonciation.NumeroDeVoieInformateur</InputNumber>
+			<label for="rue">Rue</label> <InputText class="form-control" id="rue" @bind-Value="denonciation.NomDeVoieInformateur">@denonciation.NomDeVoieInformateur</InputText><br />
+			<label for="cp">Code postal</label> <InputNumber style="width: 40%;" class="form-control" id="cp" @bind-Value="denonciation.CodePostalInformateur">@denonciation.CodePostalInformateur</InputNumber>
+			<label for="commune">Commune</label> <InputText class="form-control" id="commune" @bind-Value="denonciation.NomDeCommuneInformateur">@denonciation.NomDeCommuneInformateur</InputText>
+		</div><br /><br />
+		<div class="form-group">
+			<label for="nom">Nom du suspect</label><br />
+			<InputText class="form-control" id="nom2" @bind-Value="denonciation.NomSuspect">@denonciation.NomSuspect</InputText>
+			<label for="prenom">Prénom du suspect</label><br />
+			<InputText class="form-control" id="prenom2" @bind-Value="denonciation.PrenomSuspect">@denonciation.PrenomSuspect</InputText><br />
+			<label for="numero2">Numéro de voie</label> <InputNumber style="width: 20%;" class="form-control" id="numero2" @bind-Value="denonciation.NumeroDeVoieSuspect">@denonciation.NumeroDeVoieSuspect</InputNumber>
+			<label for="rue2">Rue</label> <InputText class="form-control" id="rue2" @bind-Value="denonciation.NomDeVoieSuspect">@denonciation.NomDeVoieSuspect</InputText><br />
+			<label for="cp2">Code postal</label> <InputNumber style="width: 40%;" class="form-control" id="cp2" @bind-Value="denonciation.CodePostalSuspect">@denonciation.CodePostalSuspect</InputNumber>
+			<label for="commune2">Commune</label> <InputText class="form-control" id="commune2" @bind-Value="denonciation.NomDeCommuneSuspect">@denonciation.NomDeCommuneSuspect</InputText>
+		</div><br /><br />
+		<div class="form-group">
+			<label for="delit">Délit</label><br />
+			<InputSelect @bind-Value="@denonciation.Delit">
+			@foreach (var delit in Enum.GetValues<Delit>())
+			{
+				<option value="@delit">@delit</option>
+			}
+		</InputSelect><br />
+			<label for="pays">Pays d'évasion</label><br />
+			<InputText class="form-control" id="pays" @bind-Value="denonciation.PaysEvasion">@denonciation.PaysEvasion</InputText>
+		</div>
+		<button type="submit" class="btn btn-primary">Ajouter</button>
+		<button @onclick="@(async () => await BlazoredModal.CancelAsync())"
+				class="btn btn-secondary">
+			Annuler
+		</button>
+	</EditForm>
+	@code {
+	[CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+	DenonciationCreationAPI denonciation = new DenonciationCreationAPI();
+
+	private async void FormSubmitted()
+	{
+		await Service.AddDenonciationAsync(denonciation);
+
+		await BlazoredModal.CloseAsync(ModalResult.Ok<DenonciationCreationAPI>(denonciation));
+	}
+}
