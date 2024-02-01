@@ -1,30 +1,30 @@
 ﻿@page "/ajoutDenonciation"
 @using API.Resources
+@using JeBalance.Domain.Model
 @inject DenonciationCreationService Service
 	<EditForm Model="@denonciation" OnValidSubmit="FormSubmitted">
 		<div class="form-group">
 			<label for="nom">Votre nom</label><br />
-			<InputText class="form-control" id="nom" @bind-
-				   Value="denonciation.NomInformateur">@denonciation.NomInformateur</InputText>
+			<InputText class="form-control" id="nom" @bind-Value="denonciation.NomInformateur">@denonciation.NomInformateur</InputText>
 			<label for="prenom">Votre prénom</label><br />
-			<InputText class="form-control" id="prenom" @bind-
-					   Value="denonciation.PrenomInformateur">@denonciation.PrenomInformateur</InputText>
+			<InputText class="form-control" id="prenom" @bind-Value="denonciation.PrenomInformateur">@denonciation.PrenomInformateur</InputText>
 		</div>
 		<div class="form-group">
 			<label for="nom">Nom du suspect</label><br />
-			<InputText class="form-control" id="nom2" @bind-
-					   Value="denonciation.NomSuspect">@denonciation.NomSuspect</InputText>
+			<InputText class="form-control" id="nom2" @bind-Value="denonciation.NomSuspect">@denonciation.NomSuspect</InputText>
 			<label for="prenom">Prénom du suspect</label><br />
-			<InputText class="form-control" id="prenom2" @bind-
-					   Value="denonciation.PrenomSuspect">@denonciation.PrenomSuspect</InputText>
+			<InputText class="form-control" id="prenom2" @bind-Value="denonciation.PrenomSuspect">@denonciation.PrenomSuspect</InputText>
 		</div>
 		<div class="form-group">
 			<label for="delit">Délit</label><br />
-			<InputText class="form-control" id="delit" @bind-
-					   Value="denonciation.Delit">@denonciation.Delit</InputText>
+			<InputSelect @bind-Value="@denonciation.Delit">
+			@foreach (var delit in Enum.GetValues<Delit>())
+			{
+				<option value="@delit">@delit</option>
+			}
+		</InputSelect><br />
 			<label for="pays">Pays d'évasion</label><br />
-			<InputText class="form-control" id="pays" @bind-
-					   Value="denonciation.PaysEvasion">@denonciation.PaysEvasion</InputText>
+			<InputText class="form-control" id="pays" @bind-Value="denonciation.PaysEvasion">@denonciation.PaysEvasion</InputText>
 		</div>
 		<button type="submit" class="btn btn-primary">Sauvegarder</button>
 		<button @onclick="@(async () => await BlazoredModal.CancelAsync())"

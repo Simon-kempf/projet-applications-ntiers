@@ -17,6 +17,7 @@ builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddSingleton<UserAccountService>();
 builder.Services.AddBlazoredModal();
+builder.Services.AddScoped<DenonciationCreationService>();
 builder.Services.AddScoped<DenonciationConsultationService>();
 
 var app = builder.Build();

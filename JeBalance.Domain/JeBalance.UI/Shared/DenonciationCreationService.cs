@@ -1,5 +1,4 @@
-﻿using API.Controllers.Dto;
-using API.Resources;
+﻿using API.Resources;
 using Blazored.Modal;
 using JeBalance.Domain.Model;
 using JeBalance.UI.Authentication;
@@ -17,9 +16,11 @@ namespace JeBalance.UI.Shared
 		{
 		}
 
-		public async Task AddDenonciationAsync(DenonciationCreationAPI denonciation)
+		public async Task<int> AddDenonciationAsync(DenonciationCreationAPI denonciation)
 		{
-			
-		}
+            var request = await MakeAddRequest(denonciation);
+            var id = await SendAddRequest(request);
+            return id;
+        }
 	}
 }
