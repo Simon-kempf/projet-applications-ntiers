@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeBalance.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240129212614_migration")]
-    partial class migration
+    [Migration("20240202151519_paysnull0")]
+    partial class paysnull0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,10 @@ namespace JeBalance.Infrastructure.Migrations
                     b.Property<int>("Delit")
                         .HasColumnType("int")
                         .HasColumnName("delit");
+
+                    b.Property<bool>("EstTraitee")
+                        .HasColumnType("bit")
+                        .HasColumnName("estTraitee");
 
                     b.Property<DateTime>("Horodatage")
                         .HasColumnType("datetime2")
@@ -85,7 +89,8 @@ namespace JeBalance.Infrastructure.Migrations
 
                     b.Property<string>("Adresse")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
                         .HasColumnName("adresse");
 
                     b.Property<string>("Nom")
@@ -100,9 +105,21 @@ namespace JeBalance.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("prenom");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
+                        .HasColumnName("role");
+
                     b.Property<int>("Statut")
                         .HasColumnType("int")
                         .HasColumnName("statut");
+
+                    b.Property<int>("estCalomniateur")
+                        .HasColumnType("int")
+                        .HasColumnName("estCalomniateur");
+
+                    b.Property<int>("estVIP")
+                        .HasColumnType("int")
+                        .HasColumnName("estVIP");
 
                     b.HasKey("Id");
 
