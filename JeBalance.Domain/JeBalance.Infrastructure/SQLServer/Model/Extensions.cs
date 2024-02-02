@@ -36,7 +36,9 @@ namespace JeBalance.Infrastructure.SQLServer.Model
 				StatutInfo = (int)denonciation.Informateur!.Statut,
 				StatutSuspect = (int)denonciation.Suspect!.Statut,
 				Horodatage = denonciation.Horodatage!.Value,
-				PaysEvasion = denonciation.Delit == (Delit)2 ? denonciation.PaysEvasion!.Value : "Non applicable",
+				PaysEvasion = denonciation.PaysEvasion!.Value == null || denonciation.PaysEvasion!.Value.Equals("")
+					? "Non renseigné"
+					: denonciation.Delit == (Delit)2 ? denonciation.PaysEvasion!.Value : "Non applicable",
 				Reponse = denonciation.Reponse!.ToSQLS(),
 				EstTraitee = denonciation.EstTraitee
 			};
