@@ -136,6 +136,7 @@ else
 		if (!result.Cancelled)
 		{
 			await FetchData();
+			var modalLInk = Modal.Show<LinkDenonciation>("Le numéro de dénonciation est le suivant : " + result.Data);
 		}
 	}
 }

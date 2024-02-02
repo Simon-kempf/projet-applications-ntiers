@@ -54,8 +54,8 @@
 
 	private async void FormSubmitted()
 	{
-		await Service.AddDenonciationAsync(denonciation);
+		int id = await Service.AddDenonciationAsync(denonciation);
 
-		await BlazoredModal.CloseAsync(ModalResult.Ok<DenonciationCreationAPI>(denonciation));
+		await BlazoredModal.CloseAsync(ModalResult.Ok<int>(id));
 	}
 }
