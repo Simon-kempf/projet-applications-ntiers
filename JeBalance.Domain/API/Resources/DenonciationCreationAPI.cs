@@ -5,9 +5,6 @@ namespace API.Resources
 {
 	public class DenonciationCreationAPI
 	{
-		//Tenter de faire en découpant les Personne et Reponse en petits champs
-		//Aussi, ne plus renseigner l'identifiant de l'Informateur et du Suspect... inutile
-		public int Id { get; set; }
 		public string NomInformateur { get; set; }
 		public string PrenomInformateur { get; set; }
 		public int CodePostalInformateur { get; set; }
